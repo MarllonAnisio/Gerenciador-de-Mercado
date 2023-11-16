@@ -7,6 +7,9 @@ public class DtoProduto {
 	private String name;
 	private int validade;
 	private TipoProduto tipoDoProduto;
+	private String Descricao;
+	
+	
 	
 	public TipoProduto getTipoDoProduto() {
 		return tipoDoProduto;
@@ -25,6 +28,12 @@ public class DtoProduto {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getDescricao() {
+		return Descricao;
+	}
+	public void setDescricao(String descricao) {
+		Descricao = descricao;
 	}
 	
 }
