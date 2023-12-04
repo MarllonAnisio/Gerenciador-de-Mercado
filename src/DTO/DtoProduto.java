@@ -8,7 +8,8 @@ public class DtoProduto {
 	private int validade;
 	private TipoProduto tipoDoProduto;
 	private String Descricao;
-	
+	private int codigoDoProduto; 
+	private double valorProduto;
 	
 	
 	public TipoProduto getTipoDoProduto() {
@@ -35,5 +36,16 @@ public class DtoProduto {
 	public void setDescricao(String descricao) {
 		Descricao = descricao;
 	}
-	
+	public int getCodigoDoProduto() {
+		return codigoDoProduto;
+	}
+	public void setCodigoDoProduto(int codigoDoProduto) {
+		this.codigoDoProduto = codigoDoProduto;
+	}
+	public double getValorProduto() {
+		return valorProduto;
+	}
+	public void setValorProduto(double valorProduto) {
+		this.valorProduto = valorProduto;
+	}
 }
