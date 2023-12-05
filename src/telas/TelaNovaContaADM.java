@@ -63,7 +63,7 @@ public class TelaNovaContaADM {
 		painel_1 = painel(j,new Color(10,10,10,150));
 		adicionarTitulo(j,"Nova Conta");
 		
-		painel_2 = painel(j,new Color(100,120,120,0));
+		painel_2 = painel(j,new Color(100,120,120,100));
 		painel_2.setBounds(0, painel_1.getHeight()*2, j.getWidth(), 40);
 		JLabel nome = new JLabel("Nome: ");
 		corTextoPadrao(nome, 15,"Arial");
@@ -72,7 +72,7 @@ public class TelaNovaContaADM {
 		inpNome.setFont(new Font("Arial",Font.BOLD,14));
 		painel_2.add(inpNome);	
 		
-		painel_3 = painel(j,new Color(100,120,120,0));
+		painel_3 = painel(j,new Color(100,120,120,100));
 		painel_3.setBounds(0, painel_2.getHeight()*3, j.getWidth(), 40);
 		JLabel email = new JLabel("E-mail: ");
 		corTextoPadrao(email, 15,"Arial");
@@ -81,7 +81,7 @@ public class TelaNovaContaADM {
 		inpEmail.setFont(new Font("Arial",Font.BOLD,14));
 		painel_3.add(inpEmail);	
 		
-		painel_4 = painel(j,new Color(100,120,120,0));
+		painel_4 = painel(j,new Color(100,120,120,100));
 		painel_4.setBounds(0, painel_3.getHeight()*4, j.getWidth(), 40);
 		JLabel senha = new JLabel("Senha: ");
 		corTextoPadrao(senha, 15,"Arial");

@@ -6,6 +6,7 @@ public class Programa {
 		//new TelaNovaContaADM();
 		//new TelaNovoCliente();
 		//new TelaNovoFornecedor();
-		new TelaNovoProdutoMercado();
+		//new TelaNovoProdutoMercado();
+		new TelaADM();
 	}
 }
