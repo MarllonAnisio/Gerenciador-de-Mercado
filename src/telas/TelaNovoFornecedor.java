@@ -32,7 +32,6 @@ public class TelaNovoFornecedor {
 	JTextArea inpDescricao = null;
 	
 	
-	JButton bntAddProduto = null;
 	JButton bntCadastrar = null;
 	
 	
@@ -110,7 +109,7 @@ public class TelaNovoFornecedor {
 		JLabel cidade = new JLabel("Cidade: ");
 		corTextoPadrao(cidade, 15,"Arial");
 		painel_5.add(cidade);
-		inpCidade = new JTextField(20);
+		inpCidade = new JPasswordField(20);
 		inpCidade.setFont(new Font("Arial",Font.BOLD,14));
 		painel_5.add(inpCidade);
 		
@@ -145,8 +144,6 @@ public class TelaNovoFornecedor {
 				
 		JPanel painel = painel(j,new Color(100,120,120,100));
 		painel.setBounds(0,painel_1.getHeight()*8, j.getWidth(), painel_1.getHeight());
-		bntAddProduto = new JButton("Adicionar Produtos");
-		painel.add(bntAddProduto);
 		
 		bntCadastrar = new JButton("Cadastrar");
 		painel.add(bntCadastrar);

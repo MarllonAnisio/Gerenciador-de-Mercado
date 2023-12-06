@@ -1,8 +1,11 @@
 package telas;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -12,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -27,21 +32,25 @@ public class TelaNovoProdutoMercado {
 	JPanel painel_7= null; 
 	JPanel painel_8= null;
 	JPanel painel_9= null; 
-	JTextField inpProduto = null;
-	JTextField inpPreco = null;
-	JTextField inpPrecoUnidade = null;
-	JTextField inpMarca = null;
-	JTextField inpEstoque  = null;
+	JPanel painel_10= null;
+	JPanel painel_11= null;
+	JTextField inpProduto = null; //use esse atributo. Pege o conteúdo usando o getText()
+	JTextField inpPreco = null;//use esse atributo. Pege o conteúdo usando o getText()
+	JTextField inpPrecoUnidade = null;//use esse atributo. Pege o conteúdo usando o getText()
+	JTextField inpMarca = null;//use esse atributo. Pege o conteúdo usando o getText()
+	JTextField inpEstoque  = null;//use esse atributo. Pege o conteúdo usando o getText()
 	
-	JTextField inpPeso = null;
+	JTextField inpPeso = null;//use esse atributo. Pege o conteúdo usando o getText()
 	JRadioButton inpG = null;
 	JRadioButton inpKg = null;
 	JRadioButton inpMl = null;
 	JRadioButton inpL = null;
-	JComboBox<String> inpProdutosCadastrados = null;
+	JComboBox<String> inpFornecedores = null;
+	String[] listaDeFornecedores = {"Fornecedor JP","Fornecedor Mercado"};
 	
+	JTextArea inpDescricao = null;
 	
-	JButton bntCadastrar = null;
+	JButton bntCadastrar = new JButton("Cadastrar");;
 	
 	
 	
@@ -53,7 +62,7 @@ public class TelaNovoProdutoMercado {
 		j.setContentPane(new ImagemPanel("src/imgs/g.png"));
 		
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		j.setSize(540,400);
+		j.setSize(700,550);
 		j.setLayout(null);
 		j.setResizable(false);
 		j.setTitle("~Produto do Fornecedor~");
@@ -62,6 +71,17 @@ public class TelaNovoProdutoMercado {
 		adicionarComponetes_2(j);
 		
 		j.setVisible(true);
+		
+		
+		
+		//*Exemplo de como pegar o dado de um campo - Isso é um ouvinto anônimo interno.
+		bntCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			System.out.println(inpProduto.getText());
+			}
+		});
+		
+		
 	}
 	
 	JLabel titulo(JFrame j, String t) { 
@@ -168,14 +188,40 @@ public class TelaNovoProdutoMercado {
         j.add(painel_7);
         
 	
+        painel_10 = painel(j,new Color(100,120,120,100));
+		painel_10.setBounds(0, painel_1.getHeight()*8, j.getWidth(), 40);
+		JLabel fornecedor = new JLabel("Fornecedores: ");
+		corTextoPadrao(fornecedor, 15,"Arial");
+		painel_10.add(fornecedor);
+		inpFornecedores= new JComboBox<String>(listaDeFornecedores);
+		inpFornecedores.setFont(new Font("Arial",Font.BOLD,14));
+		painel_10.add(inpFornecedores);
+
+		painel_11 = painel(j,new Color(100,120,120,100));
+		painel_11.setBounds(0, painel_1.getHeight()*9, j.getWidth(), 100);
+		JLabel descri = new JLabel("Descrição do Produto: ");
+		corTextoPadrao(descri, 15,"Arial");
+		painel_11.add(descri);
+		inpDescricao= new JTextArea(4,20);
+		inpDescricao.setFont(new Font("Arial",Font.BOLD,14));
+		
+		inpDescricao.setWrapStyleWord(true); // Permite que as palavras sejam quebradas para ajustar na largura
+		inpDescricao.setLineWrap(true); // Faz com que o texto pule para a próxima linha quando atingir o final na horizontal
+		JScrollPane scrollPane = new JScrollPane(inpDescricao);
+		inpDescricao.setFont(new Font("Arial",Font.BOLD,14));
+		painel_11.add(scrollPane);
+		
+	
+       
+        
+        
 	}
 	
 	void adicionarComponetes_2(JFrame j) {
 				
-		JPanel painel = painel(j,new Color(100,120,120,100));
-		painel.setBounds(0,painel_1.getHeight()*8, j.getWidth(), painel_1.getHeight());
+		JPanel painel = painel(j,new Color(100,120,120,0));
+		painel.setBounds(0,(painel_1.getHeight())*12-10, j.getWidth(), painel_1.getHeight());
 		
-		bntCadastrar = new JButton("Cadastrar");
 		painel.add(bntCadastrar);
 		
 	}
@@ -197,6 +243,7 @@ public class TelaNovoProdutoMercado {
 		j.add(p);
 		return p;
 	}
+	
 	JPanel getJPainel( Color c) {
 		JPanel p = new JPanel();
 		p.setBackground(c);
