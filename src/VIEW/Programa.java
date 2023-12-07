@@ -1,10 +1,13 @@
-package telas;
+package VIEW;
 
 public class Programa {
 	public static void main(String[] args) {
 		//new TelaLogin();
 		//new TelaNovaContaADM();
-		//new TelaNovoCliente();
+		
+		// adicionar produto
+		// cadrastrar
+	//	new TelaNovoCliente();
 		//new TelaNovoFornecedor();
 		new TelaNovoProdutoMercado();
 	}

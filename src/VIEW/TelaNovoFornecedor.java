@@ -1,21 +1,21 @@
-package telas;
+package VIEW;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
-public class TelaNovoCliente {
+public class TelaNovoFornecedor {
 	
 	JPanel painel_1 = null; 
 	JPanel painel_2 = null; 
@@ -23,19 +23,23 @@ public class TelaNovoCliente {
 	JPanel painel_4= null; 
 	JPanel painel_5= null; 
 	JPanel painel_6= null; 
+	JPanel painel_7= null; 
 	JTextField inpNome = null;
 	JTextField inpTelefone = null;
-	JTextField inpCPF = null;
+	JTextField inpCNPJ = null;
 	JTextField inpCidade = null;
-	JRadioButton inpMasculino = null;
-	JRadioButton inpFeminino = null;
-	JRadioButton inpOutro = null;
+	JComboBox<String> inpHorarioFuncionamento = null;
+	JTextArea inpDescricao = null;
+	
+	
+	JButton bntAddProduto = null;
+	JButton bntCadastrar = null;
 	
 	
 	
 	JButton bnt = null;
 	
-	public TelaNovoCliente() {
+	public TelaNovoFornecedor() {
 		JFrame j = new JFrame();
 		
 		j.setContentPane(new ImagemPanel("src/imgs/g.png"));
@@ -44,7 +48,7 @@ public class TelaNovoCliente {
 		j.setSize(540,400);
 		j.setLayout(null);
 		j.setResizable(false);
-		j.setTitle("~Novo Cliente~");
+		j.setTitle("~Novo Fornecedor~");
 		j.setLocationRelativeTo(null);
 		adicionarComponetes_1(j);
 		adicionarComponetes_2(j);
@@ -61,19 +65,18 @@ public class TelaNovoCliente {
 		painel_1.setSize(j.getWidth(),40);
 		JLabel t1 = titulo(j, title);
 		corTextoPadrao(t1, 25, "Serif");
-		painel_1.add(t1);
-		
+		painel_1.add(t1);	
 	}
 	
 	
 	void adicionarComponetes_1(JFrame j) {
 
 		painel_1 = painel(j,new Color(10,10,10,150));
-		adicionarTitulo(j,"Cadastre um Novo Cliente");
+		adicionarTitulo(j,"Cadastre um Novo Fornecedor");
 		
 		
 		painel_2 = painel(j,new Color(100,120,120,100));
-		painel_2.setBounds(0, painel_1.getHeight()*2, j.getWidth(), 40);
+		painel_2.setBounds(0, painel_1.getHeight()*1, j.getWidth(), 40);
 		JLabel nome = new JLabel("Nome: ");
 		corTextoPadrao(nome, 15,"Arial");
 		painel_2.add(nome);
@@ -83,7 +86,7 @@ public class TelaNovoCliente {
 		
 		
 		painel_3 = painel(j,new Color(100,120,120,100));
-		painel_3.setBounds(0, painel_1.getHeight()*3, j.getWidth(), 40);
+		painel_3.setBounds(0, painel_1.getHeight()*2, j.getWidth(), 40);
 		JLabel telefone = new JLabel("Telefone: ");
 		corTextoPadrao(telefone, 15,"Arial");
 		painel_3.add(telefone);
@@ -92,17 +95,17 @@ public class TelaNovoCliente {
 		painel_3.add(inpTelefone);
 		
 		painel_4 = painel(j,new Color(100,120,120,100));
-		painel_4.setBounds(0, painel_1.getHeight()*4, j.getWidth(), 40);
-		JLabel cpf = new JLabel("CPF: ");
-		corTextoPadrao(cpf, 15,"Arial");
-		painel_4.add(cpf);
-		inpCPF = new JTextField(20);
-		inpCPF.setFont(new Font("Arial",Font.BOLD,14));
-		painel_4.add(inpCPF);
+		painel_4.setBounds(0, painel_1.getHeight()*3, j.getWidth(), 40);
+		JLabel cnpj = new JLabel("CNPJ: ");
+		corTextoPadrao(cnpj, 15,"Arial");
+		painel_4.add(cnpj);
+		inpCNPJ = new JTextField(20);
+		inpCNPJ.setFont(new Font("Arial",Font.BOLD,14));
+		painel_4.add(inpCNPJ);
 		
 		
 		painel_5 = painel(j,new Color(100,120,120,100));
-		painel_5.setBounds(0, painel_1.getHeight()*5, j.getWidth(), 40);
+		painel_5.setBounds(0, painel_1.getHeight()*4, j.getWidth(), 40);
 		JLabel cidade = new JLabel("Cidade: ");
 		corTextoPadrao(cidade, 15,"Arial");
 		painel_5.add(cidade);
@@ -111,34 +114,41 @@ public class TelaNovoCliente {
 		painel_5.add(inpCidade);
 		
 		painel_6 = painel(j,new Color(100,120,120,100));
-		painel_6.setBounds(0, painel_1.getHeight()*6, j.getWidth(), 40);
-		JLabel genero = new JLabel("Gênero: ");
-		corTextoPadrao(genero, 15,"Arial");
-		painel_6.add(genero);
-		inpMasculino = new JRadioButton("Masculino");
-		inpFeminino = new JRadioButton("Feminino");
-		inpOutro = new JRadioButton("Outro");
+		painel_6.setBounds(0, painel_1.getHeight()*5, j.getWidth(), 40);
+		JLabel HFuncionamento = new JLabel("Horário de funciomamento: ");
+		corTextoPadrao(HFuncionamento, 15,"Arial");
+		painel_6.add(HFuncionamento);
 		
-		inpMasculino.setFont(new Font("Arial",Font.BOLD,14));
-		inpFeminino.setFont(new Font("Arial",Font.BOLD,14));
-		inpOutro.setFont(new Font("Arial",Font.BOLD,14));
+		String[] horarios = {"07:30 - 11:00","07:30 - 12:00", "08:00 - 12:00","13:00 - 15:00","13:00 - 17:00"};
+		inpHorarioFuncionamento = new JComboBox<String>(horarios);
+		inpHorarioFuncionamento.setFont(new Font("Arial",Font.BOLD,14));
+		painel_6.add(inpHorarioFuncionamento);
 		
-		ButtonGroup generos = new ButtonGroup();
-		generos.add(inpMasculino);
-		generos.add(inpFeminino);
-		generos.add(inpOutro);
 		
-		painel_6.add(inpMasculino);
-		painel_6.add(inpFeminino);
-		painel_6.add(inpOutro);
+		painel_7 = painel(j,new Color(100,120,120,100));
+		painel_7.setBounds(0, painel_1.getHeight()*6, j.getWidth(), 80);
+		JLabel descricao = new JLabel("Descrição: ");
+		corTextoPadrao(descricao, 15,"Arial");
+		painel_7.add(descricao);
+		inpDescricao = new JTextArea(4,20);
+		inpDescricao.setWrapStyleWord(true); // Permite que as palavras sejam quebradas para ajustar na largura
+		inpDescricao.setLineWrap(true); // Faz com que o texto pule para a próxima linha quando atingir o final na horizontal
+		JScrollPane scrollPane = new JScrollPane(inpDescricao);
+		inpDescricao.setFont(new Font("Arial",Font.BOLD,14));
+		painel_7.add(scrollPane);
+		
+		
 	}
 	
 	void adicionarComponetes_2(JFrame j) {
 				
-		JPanel painel_5 = painel(j,new Color(100,120,120,0));
-		painel_5.setBounds(0,painel_1.getHeight()*8, j.getWidth(), painel_1.getHeight());
-		bnt = new JButton("Cadastrar");
-		painel_5.add(bnt);
+		JPanel painel = painel(j,new Color(100,120,120,100));
+		painel.setBounds(0,painel_1.getHeight()*8, j.getWidth(), painel_1.getHeight());
+		bntAddProduto = new JButton("Adicionar Produtos");
+		painel.add(bntAddProduto);
+		
+		bntCadastrar = new JButton("Cadastrar");
+		painel.add(bntCadastrar);
 		
 	}
 	

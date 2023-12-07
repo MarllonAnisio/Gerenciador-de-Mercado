@@ -1,4 +1,4 @@
-package telas;
+package VIEW;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -27,6 +27,7 @@ public class TelaNovoProdutoMercado {
 	JPanel painel_7= null; 
 	JPanel painel_8= null;
 	JPanel painel_9= null; 
+	
 	JTextField inpProduto = null;
 	JTextField inpPreco = null;
 	JTextField inpPrecoUnidade = null;
@@ -53,7 +54,7 @@ public class TelaNovoProdutoMercado {
 		j.setContentPane(new ImagemPanel("src/imgs/g.png"));
 		
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		j.setSize(540,400);
+		j.setSize(700,550);
 		j.setLayout(null);
 		j.setResizable(false);
 		j.setTitle("~Produto do Fornecedor~");

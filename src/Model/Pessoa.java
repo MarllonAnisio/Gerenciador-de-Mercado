@@ -1,10 +1,10 @@
 package Model;
 
 
-import DAO.UserCrud;
+
 import DTO.DtoUser;
 
-public abstract class Pessoa implements UserCrud{
+public abstract class Pessoa{
 	private String nome;
 	private String cpf;
 	private String cnpj;
@@ -13,11 +13,8 @@ public abstract class Pessoa implements UserCrud{
 	private String telefone;
 	private String nascimento;
 	private Sexo sexo;
-	private Integer ID;
-	private String tipoDeUser;
 	
 	public Pessoa(DtoUser pessoa) {
-		this.ID = getID();
 		this.cpf = getCpf();
 		this.sexo = getSexo();	
 		this.nome = getNome();
@@ -26,12 +23,12 @@ public abstract class Pessoa implements UserCrud{
 		this.senha = getSenha();
 		this.telefone = getTelefone();
 		this.nascimento = getNascimento();
-		this.tipoDeUser = getTipoDeUser();
 	}
 	
 	public Pessoa() {
 		
 	}
+	public abstract void criarUser(Pessoa user);
 	
 	public String getSenha() {
 		return senha;
@@ -82,20 +79,5 @@ public abstract class Pessoa implements UserCrud{
 		this.sexo = sexo;
 	
 	}
-
-	public Integer getID() {
-		return ID;
-	}
-
-	public void setID(Integer iD) {
-		ID = iD;
-	}
-
-	public String getTipoDeUser() {
-		return tipoDeUser;
-	}
-
-	public void setTipoDeUser(String tipoDeUsuario) {
-		this.tipoDeUser = tipoDeUsuario;
-	}
+			
 }
