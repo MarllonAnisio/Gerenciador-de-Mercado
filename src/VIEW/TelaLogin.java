@@ -27,7 +27,7 @@ public class TelaLogin {
 	public TelaLogin() {
 		JFrame j = new JFrame();
 		
-		j.setContentPane(new ImagemPanel("src/imgs/g.png"));
+		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado_2.jpg"));
 		
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setSize(540,400);
@@ -61,7 +61,7 @@ public class TelaLogin {
 		adicionarTitulo(j,"Bem-Vindo ao Gerenciado de Mercado");
 		
 		
-		painel_2 = painel(j,new Color(100,120,120,0));
+		painel_2 = painel(j,new Color(100,120,120,100));
 		painel_2.setBounds(0, painel_1.getHeight()*3, j.getWidth(), 40);
 		JLabel email = new JLabel("Email: ");
 		corTextoPadrao(email, 15,"Arial");
@@ -71,7 +71,7 @@ public class TelaLogin {
 		painel_2.add(inpEmail);
 		
 		
-		painel_3 = painel(j,new Color(100,120,120,0));
+		painel_3 = painel(j,new Color(100,120,120,100));
 		painel_3.setBounds(0, painel_1.getHeight()*4, j.getWidth(), 40);
 		JLabel senha = new JLabel("Senha: ");
 		corTextoPadrao(senha, 15,"Arial");
@@ -92,12 +92,12 @@ public class TelaLogin {
 		ms.addMouseListener(new MouseAdapter() {
 			
 			public void mouseExited(MouseEvent e) {
-				ms.setForeground(new Color(250,250,250));
+				ms.setForeground(new Color(255,255,255));
 				j.repaint();
 			}
 			
 			public void mouseEntered(MouseEvent e) {
-				ms.setForeground(new Color(150,150,150));
+				ms.setForeground(new Color(10,10,10));
 				j.repaint();
 			}
 		});
