@@ -1,4 +1,4 @@
-package telas;
+package VIEW;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -87,7 +87,7 @@ public class TelaNovoCliente {
 		JLabel telefone = new JLabel("Telefone: ");
 		corTextoPadrao(telefone, 15,"Arial");
 		painel_3.add(telefone);
-		inpTelefone = new JTextField(20);
+		inpTelefone = new JPasswordField(20);
 		inpTelefone.setFont(new Font("Arial",Font.BOLD,14));
 		painel_3.add(inpTelefone);
 		

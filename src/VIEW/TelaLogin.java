@@ -1,4 +1,4 @@
-package telas;
+package VIEW;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,21 +13,18 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class TelaNovaContaADM {
+public class TelaLogin {
 	
 	JPanel painel_1 = null; 
 	JPanel painel_2 = null; 
 	JPanel painel_3= null; 
 	JPanel painel_4= null; 
 	JPanel painel_5= null; 
-	JPanel painel_6= null; 
-	JTextField inpNome = null;
 	JTextField inpEmail = null;
 	JPasswordField inpSenha = null;
 	JButton bnt = null;
-	JButton bnt2 = null;
 	
-	public TelaNovaContaADM() {
+	public TelaLogin() {
 		JFrame j = new JFrame();
 		
 		j.setContentPane(new ImagemPanel("src/imgs/g.png"));
@@ -36,9 +33,8 @@ public class TelaNovaContaADM {
 		j.setSize(540,400);
 		j.setLayout(null);
 		j.setResizable(false);
-		j.setTitle("~Nova Conta ADM~");
+		j.setTitle("~Login~");
 		j.setLocationRelativeTo(null);
-		
 		adicionarComponetes_1(j);
 		adicionarComponetes_2(j);
 		
@@ -55,51 +51,61 @@ public class TelaNovaContaADM {
 		JLabel t1 = titulo(j, title);
 		corTextoPadrao(t1, 25, "Serif");
 		painel_1.add(t1);
+		
 	}
 	
 	
 	void adicionarComponetes_1(JFrame j) {
 
 		painel_1 = painel(j,new Color(10,10,10,150));
-		adicionarTitulo(j,"Nova Conta");
+		adicionarTitulo(j,"Bem-Vindo ao Gerenciado de Mercado");
+		
 		
 		painel_2 = painel(j,new Color(100,120,120,100));
-		painel_2.setBounds(0, painel_1.getHeight()*2, j.getWidth(), 40);
-		JLabel nome = new JLabel("Nome: ");
-		corTextoPadrao(nome, 15,"Arial");
-		painel_2.add(nome);
-		inpNome = new JTextField(20);
-		inpNome.setFont(new Font("Arial",Font.BOLD,14));
-		painel_2.add(inpNome);	
-		
-		painel_3 = painel(j,new Color(100,120,120,100));
-		painel_3.setBounds(0, painel_2.getHeight()*3, j.getWidth(), 40);
-		JLabel email = new JLabel("E-mail: ");
+		painel_2.setBounds(0, painel_1.getHeight()*3, j.getWidth(), 40);
+		JLabel email = new JLabel("Email: ");
 		corTextoPadrao(email, 15,"Arial");
-		painel_3.add(email);
+		painel_2.add(email);
 		inpEmail = new JTextField(20);
 		inpEmail.setFont(new Font("Arial",Font.BOLD,14));
-		painel_3.add(inpEmail);	
+		painel_2.add(inpEmail);
 		
-		painel_4 = painel(j,new Color(100,120,120,100));
-		painel_4.setBounds(0, painel_3.getHeight()*4, j.getWidth(), 40);
+		
+		painel_3 = painel(j,new Color(100,120,120,100));
+		painel_3.setBounds(0, painel_1.getHeight()*4, j.getWidth(), 40);
 		JLabel senha = new JLabel("Senha: ");
 		corTextoPadrao(senha, 15,"Arial");
-		painel_4.add(senha);
+		painel_3.add(senha);
 		inpSenha = new JPasswordField(20);
 		inpSenha.setFont(new Font("Arial",Font.BOLD,14));
-		painel_4.add(inpSenha);	
-		
-		
+		painel_3.add(inpSenha);
 	}
 	
 	void adicionarComponetes_2(JFrame j) {
+
+		painel_4 = painel(j,new Color(100,120,120,0));
+		JLabel  ms= new JLabel("Nova conta");
+		painel_4.setBounds(120, painel_1.getHeight()*5, j.getWidth(), painel_1.getHeight());
+		corTextoPadrao(ms, 12,"Arial");
+		painel_4.add(ms);
+		
+		ms.addMouseListener(new MouseAdapter() {
+			
+			public void mouseExited(MouseEvent e) {
+				ms.setForeground(new Color(255,255,255));
+				j.repaint();
+			}
+			
+			public void mouseEntered(MouseEvent e) {
+				ms.setForeground(new Color(10,10,10));
+				j.repaint();
+			}
+		});
+		
 				
-		painel_5 = painel(j,new Color(255,255,255,0));
+		JPanel painel_5 = painel(j,new Color(255,255,255,0));
 		painel_5.setBounds(0,painel_1.getHeight()*7, j.getWidth(), painel_1.getHeight());
-		bnt = new JButton("Cadastrar >>");
-		bnt2 = new JButton("<< Voltar");
-		painel_5.add(bnt2);
+		bnt = new JButton("Acessar");
 		painel_5.add(bnt);
 		
 	}
@@ -116,6 +122,7 @@ public class TelaNovaContaADM {
 	
 	JPanel painel(JFrame j, Color c) {
 		JPanel p = new JPanel();
+		p.setBounds(0,0,300,300);
 		p.setBackground(c);
 		j.add(p);
 		return p;

@@ -1,4 +1,4 @@
-package telas;
+package VIEW;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -32,6 +32,7 @@ public class TelaNovoProdutoMercado {
 	JPanel painel_7= null; 
 	JPanel painel_8= null;
 	JPanel painel_9= null; 
+<<<<<<< HEAD:src/telas/TelaNovoProdutoMercado.java
 	JPanel painel_10= null;
 	JPanel painel_11= null;
 	JTextField inpProduto = null; //use esse atributo. Pege o conteúdo usando o getText()
@@ -39,6 +40,14 @@ public class TelaNovoProdutoMercado {
 	JTextField inpPrecoUnidade = null;//use esse atributo. Pege o conteúdo usando o getText()
 	JTextField inpMarca = null;//use esse atributo. Pege o conteúdo usando o getText()
 	JTextField inpEstoque  = null;//use esse atributo. Pege o conteúdo usando o getText()
+=======
+	
+	JTextField inpProduto = null;
+	JTextField inpPreco = null;
+	JTextField inpPrecoUnidade = null;
+	JTextField inpMarca = null;
+	JTextField inpEstoque  = null;
+>>>>>>> repoOriginal/main:src/VIEW/TelaNovoProdutoMercado.java
 	
 	JTextField inpPeso = null;//use esse atributo. Pege o conteúdo usando o getText()
 	JRadioButton inpG = null;

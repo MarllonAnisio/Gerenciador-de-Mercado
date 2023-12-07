@@ -1,4 +1,4 @@
-package telas;
+package VIEW;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -64,8 +64,7 @@ public class TelaNovoFornecedor {
 		painel_1.setSize(j.getWidth(),40);
 		JLabel t1 = titulo(j, title);
 		corTextoPadrao(t1, 25, "Serif");
-		painel_1.add(t1);
-		
+		painel_1.add(t1);	
 	}
 	
 	

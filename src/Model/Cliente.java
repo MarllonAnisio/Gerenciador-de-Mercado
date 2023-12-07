@@ -1,16 +1,18 @@
 package Model;
 
+import DAO.PessoaDAO;
+import DAO.UsuarioJaCadrastradaException;
 import DTO.DtoUser;
 
 public class Cliente extends Pessoa {
-	
+	PessoaDAO banco;
 	public Cliente(DtoUser pessoa) {
 		super(pessoa);
+		
 	}
-
-	
-	public void createUsuario(Pessoa person) {
-		// criar um usuario cliente
+	public void criarUser(Pessoa cliente){
+		banco = new PessoaDAO();
+		banco.criarUser(cliente);
 	}
 
 	
@@ -30,6 +32,8 @@ public class Cliente extends Pessoa {
 		// atualizar um usuario cliente do sistema
 		
 	}
+
+	
 
 
 }

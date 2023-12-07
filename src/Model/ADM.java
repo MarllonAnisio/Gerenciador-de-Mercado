@@ -3,30 +3,33 @@ package Model;
 import DTO.DtoUser;
 
 public class ADM  extends Pessoa{
-
+	Pessoa P;
+	
 	public ADM(DtoUser adm) {
 		super(adm);
 	}
-	public void createUsuario(Pessoa person) {
-		// criar um usuario ADM
+	public void criarUser(Pessoa user) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
-	public boolean deleteUsuario(Pessoa person) {
+	public boolean deleteUsuario(DtoUser person) {
 		// Deletar um usuario ADM
 		return false;
 	}
 
 
-	public Pessoa readUsuario(Pessoa pessoa) {
+	public Pessoa readUsuario(DtoUser person) {
 		//ler um Usuario  ADM
 		return null;
 	}
 
 
-	public void updateUsuario() {
+	public void updateUsuario(DtoUser person) {
 		// atualizar um usuario ADM do sistema
 		
 	}
-
+	
 }
+

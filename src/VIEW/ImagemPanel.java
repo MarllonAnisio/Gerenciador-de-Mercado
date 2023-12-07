@@ -1,4 +1,4 @@
-package telas;
+package VIEW;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
