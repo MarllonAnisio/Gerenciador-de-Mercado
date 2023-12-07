@@ -3,13 +3,19 @@ package VIEW;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import Controler.OuvinteCloseADM;
+import Controler.OuvinteNovoCliente;
 
 public class TelaADM {
 	
@@ -43,6 +49,16 @@ public class TelaADM {
 		j.setLocationRelativeTo(null);
 		adicionarComponetes_1(j);
 		//adicionarComponetes_2(j);
+		
+		
+		OuvinteCloseADM close = new OuvinteCloseADM(j);
+		j.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita o fechamento direto
+        j.addWindowListener(close);
+
+        OuvinteNovoCliente n = new OuvinteNovoCliente(j);
+        itemNovoClente.addActionListener(n);
+		
+		
 		
 		j.setVisible(true);
 	}

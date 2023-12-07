@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import Controler.OuvinteNovoADM;
+
 public class TelaNovoProdutoMercado {
 	
 	JPanel painel_1 = null; 
@@ -57,10 +59,9 @@ public class TelaNovoProdutoMercado {
 	JButton bnt = null;
 	
 	public TelaNovoProdutoMercado() {
+
 		JFrame j = new JFrame();
-		
 		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
-		
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setSize(700,550);
 		j.setLayout(null);
@@ -69,18 +70,7 @@ public class TelaNovoProdutoMercado {
 		j.setLocationRelativeTo(null);
 		adicionarComponetes_1(j);
 		adicionarComponetes_2(j);
-		
 		j.setVisible(true);
-		
-		
-		
-		//*Exemplo de como pegar o dado de um campo - Isso é um ouvinto anônimo interno.
-		bntCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			System.out.println(inpProduto.getText());
-			}
-		});
-		
 		
 	}
 	

@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controler.OuvinteCadastrarADM;
+import Controler.OuvinteNovoADM;
+import Controler.OuvinteVoltarTelaLogin;
+
 public class TelaNovaContaADM {
 	
 	JPanel painel_1 = null; 
@@ -24,8 +28,10 @@ public class TelaNovaContaADM {
 	JTextField inpNome = null;
 	JTextField inpEmail = null;
 	JPasswordField inpSenha = null;
-	JButton bnt = null;
-	JButton bnt2 = null;
+	JButton bntCadastrar = null; //Cadastrar
+	JButton bntVoltar = null; //Voltar
+	
+	String bancoDeDados;//Aqui o bd sera armazenado para validar os dados do adm? É uma boa deixar aqui?
 	
 	public TelaNovaContaADM() {
 		JFrame j = new JFrame();
@@ -41,6 +47,13 @@ public class TelaNovaContaADM {
 		
 		adicionarComponetes_1(j);
 		adicionarComponetes_2(j);
+		
+		OuvinteVoltarTelaLogin n = new OuvinteVoltarTelaLogin(j);
+		bntVoltar.addActionListener(n);
+		
+		OuvinteCadastrarADM n2 = new OuvinteCadastrarADM(j);
+		bntCadastrar.addActionListener(n2);
+		
 		
 		j.setVisible(true);
 	}
@@ -97,10 +110,10 @@ public class TelaNovaContaADM {
 				
 		painel_5 = painel(j,new Color(255,255,255,0));
 		painel_5.setBounds(0,painel_1.getHeight()*7, j.getWidth(), painel_1.getHeight());
-		bnt = new JButton("Cadastrar >>");
-		bnt2 = new JButton("<< Voltar");
-		painel_5.add(bnt2);
-		painel_5.add(bnt);
+		bntCadastrar = new JButton("Cadastrar >>");
+		bntVoltar = new JButton("<< Voltar");
+		painel_5.add(bntVoltar);
+		painel_5.add(bntCadastrar);
 		
 	}
 	

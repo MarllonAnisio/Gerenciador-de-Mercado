@@ -2,10 +2,7 @@ package VIEW;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import Controler.OuvinteCadastrarCliente;
+import Controler.OuvinteVoltarTelaADM;
+import Controler.OuvinteVoltarTelaLogin;
 
 public class TelaNovoCliente {
 	
@@ -33,7 +34,8 @@ public class TelaNovoCliente {
 	
 	
 	
-	JButton bnt = null;
+	JButton bnt = new JButton("Cadastrar");
+	JButton bntVoltar = new JButton("Voltar");
 	
 	public TelaNovoCliente() {
 		JFrame j = new JFrame();
@@ -48,6 +50,12 @@ public class TelaNovoCliente {
 		j.setLocationRelativeTo(null);
 		adicionarComponetes_1(j);
 		adicionarComponetes_2(j);
+		
+		OuvinteCadastrarCliente n = new OuvinteCadastrarCliente(j);
+		bnt.addActionListener(n);
+		
+		OuvinteVoltarTelaADM n2 = new OuvinteVoltarTelaADM(j);
+		bntVoltar.addActionListener(n2);
 		
 		j.setVisible(true);
 	}
@@ -87,7 +95,7 @@ public class TelaNovoCliente {
 		JLabel telefone = new JLabel("Telefone: ");
 		corTextoPadrao(telefone, 15,"Arial");
 		painel_3.add(telefone);
-		inpTelefone = new JPasswordField(20);
+		inpTelefone = new JTextField(20);
 		inpTelefone.setFont(new Font("Arial",Font.BOLD,14));
 		painel_3.add(inpTelefone);
 		
@@ -137,7 +145,7 @@ public class TelaNovoCliente {
 				
 		JPanel painel_5 = painel(j,new Color(100,120,120,0));
 		painel_5.setBounds(0,painel_1.getHeight()*8, j.getWidth(), painel_1.getHeight());
-		bnt = new JButton("Cadastrar");
+		painel_5.add(bntVoltar);
 		painel_5.add(bnt);
 		
 	}
