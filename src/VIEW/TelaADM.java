@@ -32,7 +32,7 @@ public class TelaADM {
 	public TelaADM() {
 		JFrame j = new JFrame();
 		
-		j.setContentPane(new ImagemPanel("src/imgs/g.png"));
+		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado_2.jpg"));
 		
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setSize(540,400);
