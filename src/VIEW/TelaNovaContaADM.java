@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controler.OuvinteCadastrarADM;
+import Controler.OuvinteNovoADM;
+import Controler.OuvinteVoltarTelaLogin;
+
 public class TelaNovaContaADM {
 	
 	JPanel painel_1 = null; 
@@ -24,13 +28,15 @@ public class TelaNovaContaADM {
 	JTextField inpNome = null;
 	JTextField inpEmail = null;
 	JPasswordField inpSenha = null;
-	JButton bnt = null;
-	JButton bnt2 = null;
+	JButton bntCadastrar = null; //Cadastrar
+	JButton bntVoltar = null; //Voltar
+	
+	String bancoDeDados;//Aqui o bd sera armazenado para validar os dados do adm? É uma boa deixar aqui?
 	
 	public TelaNovaContaADM() {
 		JFrame j = new JFrame();
 		
-		j.setContentPane(new ImagemPanel("src/imgs/g.png"));
+		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
 		
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setSize(540,400);
@@ -41,6 +47,13 @@ public class TelaNovaContaADM {
 		
 		adicionarComponetes_1(j);
 		adicionarComponetes_2(j);
+		
+		OuvinteVoltarTelaLogin n = new OuvinteVoltarTelaLogin(j);
+		bntVoltar.addActionListener(n);
+		
+		OuvinteCadastrarADM n2 = new OuvinteCadastrarADM(j);
+		bntCadastrar.addActionListener(n2);
+		
 		
 		j.setVisible(true);
 	}
@@ -63,7 +76,7 @@ public class TelaNovaContaADM {
 		painel_1 = painel(j,new Color(10,10,10,150));
 		adicionarTitulo(j,"Nova Conta");
 		
-		painel_2 = painel(j,new Color(100,120,120,0));
+		painel_2 = painel(j,new Color(100,120,120,100));
 		painel_2.setBounds(0, painel_1.getHeight()*2, j.getWidth(), 40);
 		JLabel nome = new JLabel("Nome: ");
 		corTextoPadrao(nome, 15,"Arial");
@@ -72,7 +85,7 @@ public class TelaNovaContaADM {
 		inpNome.setFont(new Font("Arial",Font.BOLD,14));
 		painel_2.add(inpNome);	
 		
-		painel_3 = painel(j,new Color(100,120,120,0));
+		painel_3 = painel(j,new Color(100,120,120,100));
 		painel_3.setBounds(0, painel_2.getHeight()*3, j.getWidth(), 40);
 		JLabel email = new JLabel("E-mail: ");
 		corTextoPadrao(email, 15,"Arial");
@@ -81,7 +94,7 @@ public class TelaNovaContaADM {
 		inpEmail.setFont(new Font("Arial",Font.BOLD,14));
 		painel_3.add(inpEmail);	
 		
-		painel_4 = painel(j,new Color(100,120,120,0));
+		painel_4 = painel(j,new Color(100,120,120,100));
 		painel_4.setBounds(0, painel_3.getHeight()*4, j.getWidth(), 40);
 		JLabel senha = new JLabel("Senha: ");
 		corTextoPadrao(senha, 15,"Arial");
@@ -97,10 +110,10 @@ public class TelaNovaContaADM {
 				
 		painel_5 = painel(j,new Color(255,255,255,0));
 		painel_5.setBounds(0,painel_1.getHeight()*7, j.getWidth(), painel_1.getHeight());
-		bnt = new JButton("Cadastrar >>");
-		bnt2 = new JButton("<< Voltar");
-		painel_5.add(bnt2);
-		painel_5.add(bnt);
+		bntCadastrar = new JButton("Cadastrar >>");
+		bntVoltar = new JButton("<< Voltar");
+		painel_5.add(bntVoltar);
+		painel_5.add(bntCadastrar);
 		
 	}
 	

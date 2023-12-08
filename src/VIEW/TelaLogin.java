@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controler.OuvinteAcessarContaADM;
+import Controler.OuvinteNovoADM;
+
 public class TelaLogin {
+	//Primeira tela do Projeto
 	
 	JPanel painel_1 = null; 
 	JPanel painel_2 = null; 
@@ -23,12 +26,12 @@ public class TelaLogin {
 	JTextField inpEmail = null;
 	JPasswordField inpSenha = null;
 	JButton bnt = null;
+	//JButton bntNovaContaADM = null;
+	JLabel  ms= new JLabel("Nova conta");
 	
 	public TelaLogin() {
 		JFrame j = new JFrame();
-		
-		j.setContentPane(new ImagemPanel("src/imgs/g.png"));
-		
+		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado_2.jpg"));
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setSize(540,400);
 		j.setLayout(null);
@@ -37,6 +40,13 @@ public class TelaLogin {
 		j.setLocationRelativeTo(null);
 		adicionarComponetes_1(j);
 		adicionarComponetes_2(j);
+		
+		OuvinteNovoADM n = new OuvinteNovoADM(j);
+		ms.addMouseListener(n);
+		
+		OuvinteAcessarContaADM n1 = new OuvinteAcessarContaADM(j);
+		bnt.addActionListener(n1);
+		
 		
 		j.setVisible(true);
 	}
@@ -61,7 +71,7 @@ public class TelaLogin {
 		adicionarTitulo(j,"Bem-Vindo ao Gerenciado de Mercado");
 		
 		
-		painel_2 = painel(j,new Color(100,120,120,0));
+		painel_2 = painel(j,new Color(100,120,120,100));
 		painel_2.setBounds(0, painel_1.getHeight()*3, j.getWidth(), 40);
 		JLabel email = new JLabel("Email: ");
 		corTextoPadrao(email, 15,"Arial");
@@ -71,7 +81,7 @@ public class TelaLogin {
 		painel_2.add(inpEmail);
 		
 		
-		painel_3 = painel(j,new Color(100,120,120,0));
+		painel_3 = painel(j,new Color(100,120,120,100));
 		painel_3.setBounds(0, painel_1.getHeight()*4, j.getWidth(), 40);
 		JLabel senha = new JLabel("Senha: ");
 		corTextoPadrao(senha, 15,"Arial");
@@ -84,7 +94,7 @@ public class TelaLogin {
 	void adicionarComponetes_2(JFrame j) {
 
 		painel_4 = painel(j,new Color(100,120,120,0));
-		JLabel  ms= new JLabel("Nova conta");
+		
 		painel_4.setBounds(120, painel_1.getHeight()*5, j.getWidth(), painel_1.getHeight());
 		corTextoPadrao(ms, 12,"Arial");
 		painel_4.add(ms);
@@ -92,12 +102,12 @@ public class TelaLogin {
 		ms.addMouseListener(new MouseAdapter() {
 			
 			public void mouseExited(MouseEvent e) {
-				ms.setForeground(new Color(250,250,250));
+				ms.setForeground(new Color(255,255,255));
 				j.repaint();
 			}
 			
 			public void mouseEntered(MouseEvent e) {
-				ms.setForeground(new Color(150,150,150));
+				ms.setForeground(new Color(10,10,10));
 				j.repaint();
 			}
 		});
