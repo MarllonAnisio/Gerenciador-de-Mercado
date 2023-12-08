@@ -32,6 +32,7 @@ public class TaxaReajuste {
 		return produto;
 	}
 	
+	
 	public DtoProduto getProduto() {
 		return produto;
 	}

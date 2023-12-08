@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
+import DAO.PessoaDAO;
 import DTO.DtoUser;
 import DTO.DtoProduto;
 
@@ -9,18 +10,17 @@ public class Fornecedor extends Pessoa {
 
 	private ArrayList<Produto> produtos = new ArrayList<Produto>();
 	
+	PessoaDAO banco;
 	
 	public Fornecedor(DtoUser pessoa) {
 		super(pessoa);
-		
+		banco = new PessoaDAO();
+	
 	}
-	public void criarUser(Pessoa user) {
-		
-		
-	}
+	
 	public boolean adicionarProduto(Produto prod) {
-		for(Produto x: produtos) {
-			if(x.getName().equals(prod.getName())){
+		for(Produto produto: produtos) {
+			if(produto.getNameProduto().equals(prod.getNameProduto())&& produto.getNomeMarca().equals(prod.getNomeMarca())){
 				return false;
 			}
 		}
@@ -29,7 +29,7 @@ public class Fornecedor extends Pessoa {
 	}
 	public Produto lerProduto(DtoProduto prod) {
 		for(Produto produto: produtos) {
-			if(produto.getName().equals(prod.getNameProduto())){
+			if(produto.getNameProduto().equals(prod.getNameProduto())){
 				return produto;
 			}
 		}
@@ -37,35 +37,42 @@ public class Fornecedor extends Pessoa {
 	}
 	public boolean removerProduto(DtoProduto prod) {
 		for(Produto produto: produtos) {
-			if(produto.getName().equals(prod.getNameProduto())){
+			if(produto.getNameProduto().equals(prod.getNameProduto())&& produto.getNomeMarca().equals(prod.getNomeMarca())){
 				produtos.remove(produto);
 				return true;
 			}
 		}
 		return false;
 	}
-
-	
-	public boolean deleteUsuario(DtoUser person) {
-		// Deletar um usuario fornecedor
+	public boolean AtualizarProduto(Produto prod) {
+		for(Produto produto: produtos) {
+			if(produto.getNameProduto().equals(prod.getNameProduto()) && produto.getNomeMarca().equals(prod.getNomeMarca())) {
+				produtos.remove(produto);
+				produto = prod;
+				produtos.add(produto);
+				return true;
+			}
+		}
 		return false;
 	}
 
-
-	public Pessoa readUsuario(DtoUser person) {
-		//ler um Usuario fornecedor
-		return null;
+	public boolean criarUser(Pessoa cliente){
+		return banco.criarUser(cliente);
 	}
-
-
-	public void updateUsuario(DtoUser person) {
-		// atualizar um usuario fornecedor do sistema
-		
+	public boolean deleteUser(DtoUser pessoa) {
+		return banco.deleteUserFornecedor(pessoa);
 	}
 	
-
-
-
+	public Pessoa readUser(DtoUser pessoa) {
+		return banco.readFornecedor(pessoa);
+	}
+	
+	public boolean updateUser(Pessoa pessoa) {
+		if(banco.atualizar(pessoa)) {
+			return true;
+		}
+		return false;
+	}
 	public ArrayList<Produto> getProdutos() {
 		return produtos;
 	}
@@ -74,11 +81,4 @@ public class Fornecedor extends Pessoa {
 	public void setProdutos(ArrayList<Produto> produtos) {
 		this.produtos = produtos;
 	}
-	
-	
-
-	
-
-
-	
 }

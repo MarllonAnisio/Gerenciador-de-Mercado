@@ -4,10 +4,11 @@ import DTO.DtoUser;
 
 public class FabricaFornecedor implements Fabrica {
 
-	@Override
-	public void criar(DtoUser user) {
-		// TODO Auto-generated method stub
-		
+	private Pessoa fornecedor;
+	
+	public boolean criar(DtoUser user) {
+		fornecedor = new Fornecedor(user);
+		return fornecedor.criarUser(fornecedor);
 	}
 
 }

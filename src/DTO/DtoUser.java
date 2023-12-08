@@ -1,18 +1,52 @@
 package DTO;
 
-import Model.Sexo;
+import Model.Fornecedor;
 
 public class DtoUser {
  
 	private String nome;
-	private String cpf;
-	private String cnpj;
+	private long cpf;
+	private long cnpj;
 	private String senha;
 	private String email;
-	private String telefone;
-	private String nascimento;
-	private Sexo sexo;
-
+	private long telefone;
+	private String cidade;
+	private String descricao;
+	
+	/**
+	 *  construtor para receber dados futuros de ADM
+	 * */
+	public DtoUser( String nome, String email, String senha) {
+		this.senha = senha;
+		this.email = email;
+		this.nome = nome;
+	}
+	
+	/**
+	 * 
+	 * construtor para receber dados futuros de um fornecedor
+	 * */
+	public DtoUser(String nome,long cnpj,long telefone,String descricao,String cidade) {
+		
+		
+		this.cidade = cidade;
+		this.cnpj = cnpj;
+		this.telefone = telefone;
+		this.descricao = descricao;
+		this.nome = nome;
+	}
+	
+	
+	
+	
+	public DtoUser(Fornecedor forn) {
+		nome = forn.getNome();
+		cnpj = forn.getCnpj();
+		telefone = forn.getTelefone();
+		cidade= forn.getCidade();
+		setDescricao(forn.getDescricao());
+	}
+	
 	
 	
 	public String getSenha() {
@@ -21,18 +55,13 @@ public class DtoUser {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getCnpj() {
+	public long getCnpj() {
 		return cnpj;
 	}
-	public void setCnpj(String cnpj) {
+	public void setCnpj(long cnpj) {
 		this.cnpj = cnpj;
 	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -45,23 +74,33 @@ public class DtoUser {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getTelefone() {
+	public long getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(String telefone) {
+	public void setTelefone(long telefone) {
 		this.telefone = telefone;
 	}
-	public String getNascimento() {
-		return nascimento;
+
+	public String getCidade() {
+		return cidade;
 	}
-	public void setNascimento(String nascimento) {
-		this.nascimento = nascimento;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
-	public Sexo getSexo() {
-		return sexo;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-	
+
+
+	public long getCpf() {
+		return cpf;
+	}
+
+
+	public void setCpf(long cpf) {
+		this.cpf = cpf;
+	}
 }

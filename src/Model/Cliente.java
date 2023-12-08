@@ -8,30 +8,26 @@ public class Cliente extends Pessoa {
 	PessoaDAO banco;
 	public Cliente(DtoUser pessoa) {
 		super(pessoa);
-		
-	}
-	public void criarUser(Pessoa cliente){
 		banco = new PessoaDAO();
-		banco.criarUser(cliente);
+	}
+	public boolean criarUser(Pessoa cliente){
+		return banco.criarUser(cliente);
+	}
+	public boolean deleteUser(DtoUser pessoa) {
+		return banco.deleteUserCliente(pessoa);
+	}
+	
+	public Pessoa readUser(DtoUser pessoa) {
+		return banco.readCliente(pessoa);
+	}
+	
+	public boolean updateUser(Pessoa Pessoa) {
+		return banco.atualizar(Pessoa);
+		
 	}
 
 	
-	public boolean deleteUsuario(Pessoa person) {
-		// Deletar um usuario
-		return false;
-	}
-
-
-	public Pessoa readUsuario(Pessoa pessoa) {
-		//ler um Usuario 
-		return null;
-	}
-
-
-	public void updateUsuario() {
-		// atualizar um usuario cliente do sistema
-		
-	}
+	
 
 	
 

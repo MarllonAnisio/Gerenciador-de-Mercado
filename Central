@@ -1,0 +1,17 @@
+<DAO.CentralDeInformacoes>
+  <administradores>
+    <Model.ADM>
+      <nome>Jonas</nome>
+      <cpf>0</cpf>
+      <cnpj>0</cnpj>
+      <senha>12se45aa</senha>
+      <email>marllon@gmail.com</email>
+      <telefone>0</telefone>
+      <banco>
+        <CDI reference="../../../.."/>
+      </banco>
+    </Model.ADM>
+  </administradores>
+  <clientes/>
+  <fornecedores/>
+</DAO.CentralDeInformacoes>

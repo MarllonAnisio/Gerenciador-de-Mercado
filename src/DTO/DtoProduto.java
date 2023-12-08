@@ -16,6 +16,9 @@ public class DtoProduto {
 	public DtoProduto() {
 		
 	}
+	/**
+	 * Construtor cheio terá que ser assim para adicionarmos nosso produto
+	 * */
 	public DtoProduto(String nomeProd,double valorGeral,
 			double valor,String marca,TipoProduto tipo,
 			String descricao,int quantidade,double peso) {
