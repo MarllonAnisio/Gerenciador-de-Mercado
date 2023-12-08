@@ -21,6 +21,7 @@ public class Produto implements ContratoProduto {
 	/**
 	 * Construtor geral de Produto, produto tem que ter todos os campos com valores pois partirá para o banco
 	 * */
+	
 	public Produto(DtoProduto prod) {
 		nameProduto = prod.getNameProduto();
 		qtdProdutos = prod.getQtdProdutos();
@@ -49,9 +50,6 @@ public class Produto implements ContratoProduto {
 	public boolean updateProduto(Produto prod,DtoUser forn) {
 		return banco.updateProduto(prod,forn);
 	}
-	/***/
-	
-	
 	
 	
 	public TipoProduto getTipoDoProduto() {

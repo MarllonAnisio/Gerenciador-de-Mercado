@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 import DAO.PessoaDAO;
 import DAO.UsuarioJaCadrastradaException;
 import DTO.DtoUser;
@@ -27,6 +29,9 @@ public class Cliente extends Pessoa {
 	public boolean updateUser(Pessoa Pessoa) {
 		return banco.atualizar(Pessoa);
 		
+	}
+	public ArrayList<Cliente> retornarArrayClientes(){
+		return banco.retornarArrayClientes();
 	}
 
 	

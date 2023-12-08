@@ -2,6 +2,8 @@ package DAO;
 
 
 
+import java.util.ArrayList;
+
 import DTO.DtoProduto;
 import DTO.DtoUser;
 import Model.Fornecedor;
@@ -57,5 +59,7 @@ public class ProdutoDAO implements ContratoProduto{
 		}
 		return false;
 	}
-
+	public ArrayList<Produto> retornaArrayProduto(Fornecedor user){
+		return user.retornaArrayProdutos();
+	}
 }

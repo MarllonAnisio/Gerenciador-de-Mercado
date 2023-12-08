@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 import DAO.PessoaDAO;
 import DTO.DtoUser;
 
@@ -17,20 +19,22 @@ public class ADM  extends Pessoa{
 		return banco.criarUser(user);
 	}
 
-	@Override
+
 	public boolean deleteUser(DtoUser pessoa) {
 		return banco.deleteUserADM(pessoa);
 	}
 
-	@Override
+
 	public ADM readUser(DtoUser pessoa) {
 		return banco.readADM(pessoa);
 	}
-	@Override
+
 	public boolean updateUser(Pessoa Pessoa) {
 		return banco.atualizar(Pessoa);
 	}
 
-	
+	public  ArrayList<ADM> retornarArrayADM(){
+		return banco.retornarArrayADM();
+	}
 }
 

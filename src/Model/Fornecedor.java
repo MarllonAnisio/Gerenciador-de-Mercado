@@ -55,6 +55,13 @@ public class Fornecedor extends Pessoa {
 		}
 		return false;
 	}
+	
+	
+	
+	public  ArrayList<Fornecedor> retornaArrayFornecedor(Pessoa p){
+		return banco.retornaArrayFornecedor();
+	}
+	
 	/**
 	 * parte do trajeto até o banco este fará  a criação do mesmo
 	 * */
@@ -75,11 +82,13 @@ public class Fornecedor extends Pessoa {
 		}
 		return false;
 	}
-	public ArrayList<Produto> getProdutos() {
+	/**
+	 * retornando Array de produtos
+	 * */
+	
+	public ArrayList<Produto> retornaArrayProdutos() {
 		return produtos;
 	}
-
-
 	public void setProdutos(ArrayList<Produto> produtos) {
 		this.produtos = produtos;
 	}
