@@ -38,7 +38,9 @@ public class DtoUser {
 	
 	
 	
-	
+	/**
+	 * caso necessario repassar valores de um fornecedor sem passar uma copia do mesmo para camadas superiores
+	 * */
 	public DtoUser(Fornecedor forn) {
 		nome = forn.getNome();
 		cnpj = forn.getCnpj();

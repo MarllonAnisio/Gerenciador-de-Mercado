@@ -33,6 +33,9 @@ public class DtoProduto {
 		setNomeMarca(marca);
 		
 	}
+	/**
+	 * retorna o tipo do produto, o tipo do produto inpactará na criação do mesmo
+	 * */
 	public TipoProduto getTipoDoProduto() {
 		return tipoDoProduto;
 	}

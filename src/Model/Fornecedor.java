@@ -55,7 +55,9 @@ public class Fornecedor extends Pessoa {
 		}
 		return false;
 	}
-
+	/**
+	 * parte do trajeto até o banco este fará  a criação do mesmo
+	 * */
 	public boolean criarUser(Pessoa cliente){
 		return banco.criarUser(cliente);
 	}

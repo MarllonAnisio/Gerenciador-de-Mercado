@@ -10,7 +10,9 @@ public class ADM  extends Pessoa{
 		banco = new PessoaDAO();
 	}
 
-	@Override
+	/**
+	 * parte do trajeto até o banco este fará  a criação do mesmo
+	 * */
 	public boolean criarUser(Pessoa user) {
 		return banco.criarUser(user);
 	}

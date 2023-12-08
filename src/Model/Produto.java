@@ -31,7 +31,9 @@ public class Produto implements ContratoProduto {
 		descricao = prod.getDescricao();
 	}
 	
-	/***/
+	/**
+	 *  parte do trajeto até o banco este fará  a criação do mesmo
+	 * */
 	public boolean criarProduto(Produto prod,DtoUser forn) {
 		return banco.criarProduto(prod,forn);
 	}
