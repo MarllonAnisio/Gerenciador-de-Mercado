@@ -1,83 +1,115 @@
 package Model;
 
-
-
 import DTO.DtoUser;
 
-public abstract class Pessoa{
+public abstract class Pessoa {
 	private String nome;
-	private String cpf;
-	private String cnpj;
+	private long cpf;
+	private long cnpj;
 	private String senha;
 	private String email;
-	private String telefone;
-	private String nascimento;
-	private Sexo sexo;
-	
+	private long telefone;
+
+	private String descricao;
+	private String cidade;
+
+	/**
+	 * construtor de pessoa esse construtor tem tudo que necessita para criaçao das
+	 * 3 variantes de pessoa.
+	 */
 	public Pessoa(DtoUser pessoa) {
-		this.cpf = getCpf();
-		this.sexo = getSexo();	
-		this.nome = getNome();
-		this.cnpj = getCnpj();
-		this.email = getEmail();
-		this.senha = getSenha();
-		this.telefone = getTelefone();
-		this.nascimento = getNascimento();
+		this.cpf = pessoa.getCpf();
+		this.nome = pessoa.getNome();
+		this.cnpj = pessoa.getCnpj();
+		this.email = pessoa.getEmail();
+		this.senha = pessoa.getSenha();
+		this.telefone = pessoa.getTelefone();
+		this.cidade = pessoa.getCidade();
+
 	}
-	
 	public Pessoa() {
-		
 	}
-	public abstract void criarUser(Pessoa user);
-	
+	/**
+	 * metodo que deverá ser sobrescrito pelas subClasses
+	 */
+	public abstract boolean criarUser(Pessoa user);
+
+	/**
+	 * metodo que deverá ser sobrescrito pelas subClasses
+	 */
+	public abstract boolean deleteUser(DtoUser pessoa);
+
+	/**
+	 * metodo que deverá ser sobrescrito pelas subClasses
+	 */
+	public abstract Pessoa readUser(DtoUser pessoa);
+
+	/**
+	 * metodo que deverá ser sobrescrito pelas subClasses
+	 */
+	public abstract boolean updateUser(Pessoa Pessoa);
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getCnpj() {
+
+	public long getCnpj() {
 		return cnpj;
 	}
-	public void setCnpj(String cnpj) {
+
+	public void setCnpj(long cnpj) {
 		this.cnpj = cnpj;
 	}
-	public String getCpf() {
+
+	public long getCpf() {
 		return cpf;
 	}
-	public void setCpf(String cpf) {
+
+	public void setCpf(long cpf) {
 		this.cpf = cpf;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getTelefone() {
+
+	public long getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(String telefone) {
+
+	public void setTelefone(long telefone) {
 		this.telefone = telefone;
 	}
-	public String getNascimento() {
-		return nascimento;
+
+	public String getCidade() {
+		return cidade;
 	}
-	public void setNascimento(String nascimento) {
-		this.nascimento = nascimento;
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
-	public Sexo getSexo() {
-		return sexo;
+
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
-	
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-			
 }

@@ -10,56 +10,55 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 
+/**
+ * persistencia que fará com que tenhamos sobContole a nossa Central
+ * 
+ */
 public class Persistencia {
-	private volatile static Persistencia instance;
 	/**
-	 * persistencia com direito a escalabilidade multi-threading
-	 * 
-	 * com checagem duas etapas
-	 * 
-	 * padrao Singleton implementado
-	 * 
+	 * XStream que será criado e armazenará nossa central
 	 * */
-	public static Persistencia getInstance() {
-		if(instance == null) {
-			 synchronized(Persistencia.class) {
-				 if(instance == null) {
-					 instance = new Persistencia();
-				 }
-			 }
-		}
-		return instance;
+	XStream xstream = new XStream(new DomDriver());
+	/**
+	 * arquivo que por sua vez será o caminho unico pois já é definido na criação
+	 * */
+	public File arquivo;
+	/**
+	 * construtor da persistencia que define o caminho que a mesma 
+	 * */
+	public Persistencia() {
+		xstream.addPermission(AnyTypePermission.ANY);
+		arquivo = new File("Central");
 	}
-    private XStream xstream = new XStream(new DomDriver());
-    private File arquivo;
-    private Persistencia(){
-        xstream.addPermission(AnyTypePermission.ANY);
-    }
-    public void salvarCentral(CentralDeInformacoes banco, String caminho){
-        String xml = xstream.toXML(banco);
-        arquivo = new File(caminho);
-            try {
-                if(!arquivo.exists())
-                    arquivo.createNewFile();
-                PrintWriter gravar = new PrintWriter(arquivo);
-                gravar.println(xml);
-                gravar.close();
-            }catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-    }
-    public CentralDeInformacoes recuperarCentral(String caminho){
-        arquivo = new File(caminho);
-            try {
-                if(arquivo.exists()) {
-                    FileInputStream fis = new FileInputStream(arquivo);
-                    return (CentralDeInformacoes) xstream.fromXML(fis);
-                }
+	/**
+	 * metodo que salvará nosso nossa central.XML
+	 * */
+	public void salvarCentral(CentralDeInformacoes banco, String caminho) {
+		try {
+			String xml = xstream.toXML(banco);
+			PrintWriter gravar = new PrintWriter(arquivo);
+			gravar.println(xml);
+			gravar.close();
 
-            } catch (FileNotFoundException e) {
-                 e.printStackTrace();
-            }
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	/**
+	 * metodo utilizado para recuperarmos nossa central esse recuperar e o proprio Salvar so vão ser utilizados
+	 * pelo nosso padrao Singleton que é nossa Central de informações
+	 * */
+	public CentralDeInformacoes recuperarCentral(String caminho) {
+		try {
+			if (arquivo.exists()) {
+				FileInputStream fis = new FileInputStream(arquivo);
+				CentralDeInformacoes p = (CentralDeInformacoes) xstream.fromXML(fis);
+				return p;
+			}
 
-        return new CentralDeInformacoes();
-    }
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

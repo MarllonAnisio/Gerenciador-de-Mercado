@@ -8,6 +8,6 @@ import DTO.DtoUser;
  * */
 public interface Fabrica {
 	
-	public abstract void criar(DtoUser user);
+	public abstract boolean criar(DtoUser user);
 	
 }

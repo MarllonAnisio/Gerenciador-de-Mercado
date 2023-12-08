@@ -1,35 +1,40 @@
 package Model;
 
+import java.util.ArrayList;
+
+import DAO.PessoaDAO;
 import DTO.DtoUser;
 
 public class ADM  extends Pessoa{
-	Pessoa P;
-	
+	PessoaDAO banco;
 	public ADM(DtoUser adm) {
 		super(adm);
-	}
-	public void criarUser(Pessoa user) {
-		// TODO Auto-generated method stub
-		
+		banco = new PessoaDAO();
 	}
 
-	
-	public boolean deleteUsuario(DtoUser person) {
-		// Deletar um usuario ADM
-		return false;
+	/**
+	 * parte do trajeto até o banco este fará  a criação do mesmo
+	 * */
+	public boolean criarUser(Pessoa user) {
+		return banco.criarUser(user);
 	}
 
 
-	public Pessoa readUsuario(DtoUser person) {
-		//ler um Usuario  ADM
-		return null;
+	public boolean deleteUser(DtoUser pessoa) {
+		return banco.deleteUserADM(pessoa);
 	}
 
 
-	public void updateUsuario(DtoUser person) {
-		// atualizar um usuario ADM do sistema
-		
+	public ADM readUser(DtoUser pessoa) {
+		return banco.readADM(pessoa);
 	}
-	
+
+	public boolean updateUser(Pessoa Pessoa) {
+		return banco.atualizar(Pessoa);
+	}
+
+	public  ArrayList<ADM> retornarArrayADM(){
+		return banco.retornarArrayADM();
+	}
 }
 

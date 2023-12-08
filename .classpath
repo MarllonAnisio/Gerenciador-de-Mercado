@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Biblioteca/xstream-1.4.20.jar"/>
+	<classpathentry kind="lib" path="Biblioteca/xstream-1.4.20.jar" sourcepath="Biblioteca/xstream-1.4.20.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
