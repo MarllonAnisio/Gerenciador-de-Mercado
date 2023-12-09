@@ -77,7 +77,20 @@ public class OuvinteADM implements ActionListener, MouseListener, WindowListener
 			 Ouvinte t = new TelaLogin();
 			 t.desenharTela();
 		}
-		else if (ouvinteBnt instanceof TelaNovoFornecedor) {
+		else if (frame instanceof TelaNovoFornecedor) {
+			
+			if(e.getActionCommand().equals("Cadastrar")) {
+				TelaNovoFornecedor frameTela = (TelaNovoFornecedor) frame;
+				String nome = frameTela.getInpNome().getText();
+				String Telefone = frameTela.getInpTelefone().getText();
+				String cnpj = frameTela.getInpCNPJ().getText();
+				String cidade = frameTela.getInpCidade().getText();
+				String horaFunci = (String) frameTela.getInpHorarioFuncionamento().getSelectedItem();
+				String descri = frameTela.getInpDescricao().getText();
+				System.out.println(horaFunci);
+				System.out.println(descri);
+			}
+			
 			
 		}
 		else if(frame instanceof TelaADM) {
@@ -89,6 +102,8 @@ public class OuvinteADM implements ActionListener, MouseListener, WindowListener
 			}
 			
 		}
+		
+		
 
 	}
 

@@ -2,6 +2,7 @@ package VIEW;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Controler.Ouvinte;
+import Controler.OuvinteADM;
 
 public class TelaNovoFornecedor extends JFrame implements Ouvinte{
 	
@@ -32,7 +34,7 @@ public class TelaNovoFornecedor extends JFrame implements Ouvinte{
 	JTextArea inpDescricao = null;
 	
 	
-	JButton bntCadastrar = null;
+	JButton bntCadastrar = new JButton("Cadastrar");;
 	
 	
 	
@@ -53,10 +55,34 @@ public class TelaNovoFornecedor extends JFrame implements Ouvinte{
 		adicionarComponetes_1(this);
 		adicionarComponetes_2(this);
 		
+		Ouvinte ouvinte = new OuvinteADM(new TelaADM(), this);
+		bntCadastrar.addActionListener((ActionListener)ouvinte);
+		
+		
+		
+		
 		setVisible(true);
 
 	}
 	
+	public JTextField getInpNome() {
+		return inpNome;
+	}
+	public JTextField getInpTelefone() {
+		return inpTelefone;
+	}
+	public JTextField getInpCNPJ() {
+		return inpCNPJ;
+	}
+	public JTextField getInpCidade() {
+		return inpCidade;
+	}
+	public JComboBox<String> getInpHorarioFuncionamento() {
+		return inpHorarioFuncionamento;
+	}
+	public JTextArea getInpDescricao() {
+		return inpDescricao;
+	}
 	JLabel titulo(JFrame j, String t) { 
 		JLabel label = new JLabel(t);
 		return label;
@@ -146,7 +172,6 @@ public class TelaNovoFornecedor extends JFrame implements Ouvinte{
 		JPanel painel = painel(j,new Color(100,120,120,100));
 		painel.setBounds(0,painel_1.getHeight()*8, j.getWidth(), painel_1.getHeight());
 		
-		bntCadastrar = new JButton("Cadastrar");
 		painel.add(bntCadastrar);
 		
 	}

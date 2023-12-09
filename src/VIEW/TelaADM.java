@@ -53,7 +53,7 @@ public class TelaADM extends JFrame implements Ouvinte{
 		addWindowListener((WindowListener)ouvinte);
 		
 		ouvinte = new OuvinteADM(new TelaNovoCliente(), this);
-		itemNovoClente.addActionListener((ActionListener)ouvinte);
+		itemNovoFornecedor.addActionListener((ActionListener)ouvinte);
 		
 		setVisible(true);
 		
