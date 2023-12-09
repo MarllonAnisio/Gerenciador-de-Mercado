@@ -2,11 +2,13 @@ package DAO;
 
 import java.util.ArrayList;
 
+import DTO.DtoProduto;
 import DTO.DtoUser;
 import Model.ADM;
 import Model.Cliente;
 import Model.Fornecedor;
 import Model.Pessoa;
+import Model.Produto;
 
 /**
  * Central onde todas as nossas informacoes estão armazenadas
@@ -29,11 +31,65 @@ public class CentralDeInformacoes {
 	 */
 	private ArrayList<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 
+	private ArrayList<Produto> estoque = new ArrayList<Produto>();
+
 	/**
 	 * Construtor privado pela classe ter adotado o padrao Singleton.
 	 */
 	private CentralDeInformacoes() {
 
+	}
+
+	public boolean criarProduto(Produto prod) {
+		for (Produto x : estoque) {
+			if (prod.getNameProduto().equals(x.getNameProduto())) {
+				return false;
+			}
+		}
+		estoque.add(prod);
+		return true;
+	}
+
+	public boolean checarProduto(DtoProduto prod) {
+		for (Produto x : estoque) {
+			if (prod.getNameProduto().equals(x.getNameProduto())) {
+				return true;
+
+			}
+		}
+		return false;
+	}
+
+	public boolean deletarProduto(DtoProduto prod) {
+		for (Produto x : estoque) {
+			if (prod.getNameProduto().equals(x.getNameProduto())) {
+				estoque.remove(x);
+				return true;
+
+			}
+		}
+		return false;
+	}
+
+	public boolean atualizarProduto(Produto prod) {
+		for (Produto x : estoque) {
+			if (prod.getNameProduto().equals(x.getNameProduto())) {
+				estoque.remove(x);
+				estoque.add(prod);
+				return true;
+
+			}
+		}
+		return false;
+	}
+
+	public Produto lerProduto(DtoProduto prod) {
+		for (Produto x : estoque) {
+			if (prod.getNameProduto().equals(x.getNameProduto())) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -70,7 +126,7 @@ public class CentralDeInformacoes {
 
 	public boolean checagemFornecedores(DtoUser user) {
 		for (Fornecedor fornecedor : fornecedores) {
-			if (user.getEmail().equals(fornecedor.getEmail()) || user.getCnpj() == fornecedor.getCnpj()) {
+			if (user.getNome().equals(user.getNome()) || user.getCnpj() == fornecedor.getCnpj()) {
 				return true;
 			}
 		}
@@ -172,50 +228,51 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
+//	public boolean atualizar(Pessoa user) {
+//		if (user instanceof Cliente) {
+//			for (Cliente x : clientes) {
+//				if (user.getEmail().equals(x.getEmail())) {
+//					clientes.remove(x);
+//					x = (Cliente) user;
+//					clientes.add(x);
+//					return true;
+//				}
+//			}
+//		} else if (user instanceof ADM) {
+//			for (ADM x : administradores) {
+//				if (user.getEmail().equals(x.getEmail())) {
+//					administradores.remove(x);
+//					x = (ADM) user;
+//					administradores.add(x);
+//					return true;
+//				}
+//			}
+//		} else if (user instanceof Fornecedor) {
+//			for (Fornecedor x : fornecedores) {
+//				if (user.getEmail().equals(x.getEmail())) {
+//					fornecedores.remove(x);
+//					x = (Fornecedor) user;
+//					fornecedores.add(x);
+//					return true;
+//				}
+//			}
+//		}
+//		return false;
+//	}
 
-	public boolean atualizar(Pessoa user) {
-		if (user instanceof Cliente) {
-			for (Cliente x : clientes) {
-				if (user.getEmail().equals(x.getEmail())) {
-					clientes.remove(x);
-					x = (Cliente) user;
-					clientes.add(x);
-					return true;
-				}
-			}
-		} else if (user instanceof ADM) {
-			for (ADM x : administradores) {
-				if (user.getEmail().equals(x.getEmail())) {
-					administradores.remove(x);
-					x = (ADM) user;
-					administradores.add(x);
-					return true;
-				}
-			}
-		} else if (user instanceof Fornecedor) {
-			for (Fornecedor x : fornecedores) {
-				if (user.getEmail().equals(x.getEmail())) {
-					fornecedores.remove(x);
-					x = (Fornecedor) user;
-					fornecedores.add(x);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	public boolean atualizarFornecedor(Fornecedor user) {
+	public boolean atualizarFornecedor(Pessoa user) {
 		for (Fornecedor x : fornecedores) {
 			if (user.getEmail().equals(x.getEmail())) {
 				fornecedores.remove(x);
 				x = (Fornecedor) user;
 				fornecedores.add(x);
 				return true;
+			}
 		}
+		return false;
 	}
-	return false;
-	}
-	public boolean atualizarADM(ADM user) {
+
+	public boolean atualizarADM(Pessoa user) {
 		for (ADM x : administradores) {
 			if (user.getEmail().equals(x.getEmail())) {
 				administradores.remove(x);
@@ -226,7 +283,8 @@ public class CentralDeInformacoes {
 		}
 		return false;
 	}
-	public boolean atualizarCliente(Cliente user) {
+
+	public boolean atualizarCliente(Pessoa user) {
 		for (Cliente x : clientes) {
 			if (user.getEmail().equals(x.getEmail())) {
 				clientes.remove(x);
@@ -238,14 +296,15 @@ public class CentralDeInformacoes {
 		return false;
 	}
 
-	
-	public  ArrayList<Fornecedor> retornaArrayFornecedor(){
+	public ArrayList<Fornecedor> retornaArrayFornecedor() {
 		return getFornecedores();
 	}
-	public ArrayList<Cliente> retornarArrayClientes(){
+
+	public ArrayList<Cliente> retornarArrayClientes() {
 		return getClientes();
 	}
-	public  ArrayList<ADM> retornarArrayADM(){
+
+	public ArrayList<ADM> retornarArrayADM() {
 		return getAdministradores();
 	}
 
@@ -280,5 +339,13 @@ public class CentralDeInformacoes {
 
 	public void salvarCentral(CentralDeInformacoes cDI, String string) {
 		banco.salvarCentral(cDI, null);
+	}
+
+	public ArrayList<Produto> retornarProdutos() {
+		return estoque;
+	}
+
+	public void setProdutos(ArrayList<Produto> produto) {
+		estoque = produto;
 	}
 }

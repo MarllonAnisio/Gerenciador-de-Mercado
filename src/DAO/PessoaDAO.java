@@ -74,8 +74,22 @@ public class PessoaDAO {
 		return CDI.lerADM(user);
 	}
 
-	public boolean atualizar(Pessoa user) {
-		if(CDI.atualizar(user)) {
+	public boolean atualizarFornecedor(Pessoa user) {
+		if(CDI.atualizarFornecedor(user)) {
+			CDI.salvarCentral(CDI, "Central");
+			return true;
+		}
+		return false;
+	}
+	public boolean atualizarADM(Pessoa user) {
+		if(CDI.atualizarADM(user)) {
+			CDI.salvarCentral(CDI, "Central");
+			return true;
+		}
+		return false;
+	}
+	public boolean atualizarCliente(Pessoa user) {
+		if(CDI.atualizarCliente(user)) {
 			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}

@@ -27,7 +27,7 @@ public class Cliente extends Pessoa {
 	}
 	
 	public boolean updateUser(Pessoa Pessoa) {
-		return banco.atualizar(Pessoa);
+		return banco.atualizarCliente(Pessoa);
 		
 	}
 	public ArrayList<Cliente> retornarArrayClientes(){

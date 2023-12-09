@@ -58,7 +58,7 @@ public class Fornecedor extends Pessoa {
 	
 	
 	
-	public  ArrayList<Fornecedor> retornaArrayFornecedor(Pessoa p){
+	public  ArrayList<Fornecedor> retornaArrayFornecedor(){
 		return banco.retornaArrayFornecedor();
 	}
 	
@@ -77,7 +77,7 @@ public class Fornecedor extends Pessoa {
 	}
 	
 	public boolean updateUser(Pessoa pessoa) {
-		if(banco.atualizar(pessoa)) {
+		if(banco.atualizarFornecedor(pessoa)) {
 			return true;
 		}
 		return false;

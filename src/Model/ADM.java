@@ -30,7 +30,7 @@ public class ADM  extends Pessoa{
 	}
 
 	public boolean updateUser(Pessoa Pessoa) {
-		return banco.atualizar(Pessoa);
+		return banco.atualizarADM(Pessoa);
 	}
 
 	public  ArrayList<ADM> retornarArrayADM(){

@@ -20,7 +20,7 @@ public class ProdutoDAO implements ContratoProduto{
 		f = CDI.lerFornecedor(forn);
 		if(f != null) {
 			if(f.adicionarProduto(prod)) {
-				if(CDI.atualizar(f)) {
+				if(CDI.atualizarFornecedor(f)) {
 					 CDI.salvarCentral(CDI, "Central");
 					return true;
 				}
@@ -33,7 +33,7 @@ public class ProdutoDAO implements ContratoProduto{
 		f = CDI.lerFornecedor(forn);
 		if(f != null) {
 			if(f.removerProduto(prod)) {
-				if(CDI.atualizar(f)) {
+				if(CDI.atualizarFornecedor(f)) {
 					 CDI.salvarCentral(CDI, "Central");
 				}
 			}
@@ -52,7 +52,7 @@ public class ProdutoDAO implements ContratoProduto{
 		f = CDI.lerFornecedor(forn);
 		if(f != null) {
 			if(f.AtualizarProduto(prod)) {
-				if(CDI.atualizar(f)) {
+				if(CDI.atualizarFornecedor(f)) {
 					 CDI.salvarCentral(CDI, "Central");
 				}
 			}
