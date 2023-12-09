@@ -38,7 +38,7 @@ public class PessoaDAO {
 
 	public boolean deleteUserADM(DtoUser person) {
 		if (CDI.removerADM(person)) {
-			CDI.salvarCentral(CDI, "central");
+			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
 		return false;
@@ -46,7 +46,7 @@ public class PessoaDAO {
 
 	public boolean deleteUserFornecedor(DtoUser person) {
 		if (CDI.removerFornecedor(person)) {
-			CDI.salvarCentral(CDI, "central");
+			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
 		return false;
@@ -54,7 +54,7 @@ public class PessoaDAO {
 
 	public boolean deleteUserCliente(DtoUser person) {
 		if (CDI.removerCliente(person)) {
-			CDI.salvarCentral(CDI, "central");
+			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
 		return false;
@@ -75,9 +75,22 @@ public class PessoaDAO {
 	}
 
 	public boolean atualizar(Pessoa user) {
-		return CDI.atualizar(user);
+		if(CDI.atualizar(user)) {
+			CDI.salvarCentral(CDI, "Central");
+			return true;
+		}
+		return false;
 	}
-
+	public boolean procureADM(DtoUser user) {
+		return CDI.checagemADM(user);
+	}
+	public boolean procureFornecedor(DtoUser user) {
+		return CDI.checagemFornecedores(user);
+	}
+	public boolean procureCliente(DtoUser user) {
+		return CDI.checagemClientes(user);
+	}
+	
 	public ArrayList<Fornecedor> retornaArrayFornecedor() {
 		return CDI.retornaArrayFornecedor();
 	}

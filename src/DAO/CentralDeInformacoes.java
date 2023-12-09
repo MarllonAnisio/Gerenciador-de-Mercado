@@ -59,7 +59,7 @@ public class CentralDeInformacoes {
 		return instance;
 	}
 
-	public boolean checagemClientes(Pessoa user) {
+	public boolean checagemClientes(DtoUser user) {
 		for (Cliente x : clientes) {
 			if (user.getEmail().equals(x.getEmail())) {
 				return true;
@@ -68,7 +68,7 @@ public class CentralDeInformacoes {
 		return false;
 	}
 
-	public boolean checagemFornecedores(Pessoa user) {
+	public boolean checagemFornecedores(DtoUser user) {
 		for (Fornecedor x : fornecedores) {
 			if (user.getEmail().equals(x.getEmail())) {
 				return true;
@@ -77,7 +77,7 @@ public class CentralDeInformacoes {
 		return false;
 	}
 
-	public boolean checagemADM(Pessoa user) {
+	public boolean checagemADM(DtoUser user) {
 		for (ADM x : administradores) {
 			if (user.getEmail().equals(x.getEmail())) {
 				return false;
@@ -204,6 +204,40 @@ public class CentralDeInformacoes {
 		}
 		return false;
 	}
+	public boolean atualizarFornecedor(Fornecedor user) {
+		for (Fornecedor x : fornecedores) {
+			if (user.getEmail().equals(x.getEmail())) {
+				fornecedores.remove(x);
+				x = (Fornecedor) user;
+				fornecedores.add(x);
+				return true;
+		}
+	}
+	return false;
+	}
+	public boolean atualizarADM(ADM user) {
+		for (ADM x : administradores) {
+			if (user.getEmail().equals(x.getEmail())) {
+				administradores.remove(x);
+				x = (ADM) user;
+				administradores.add(x);
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean atualizarCliente(Cliente user) {
+		for (Cliente x : clientes) {
+			if (user.getEmail().equals(x.getEmail())) {
+				clientes.remove(x);
+				x = (Cliente) user;
+				clientes.add(x);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	
 	public  ArrayList<Fornecedor> retornaArrayFornecedor(){
 		return getFornecedores();
