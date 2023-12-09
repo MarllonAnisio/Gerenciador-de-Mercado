@@ -14,8 +14,21 @@ import javax.swing.JTextField;
 import Controler.Ouvinte;
 import Controler.OuvinteADM;
 
-public class TelaNovaContaADM implements Ouvinte{
+public class TelaNovaContaADM extends JFrame implements Ouvinte{
 	
+	public JTextField getInpNome() {
+		return inpNome;
+	}
+
+
+	public JTextField getInpEmail() {
+		return inpEmail;
+	}
+
+
+	public JPasswordField getInpSenha() {
+		return inpSenha;
+	}
 	JPanel painel_1 = null; 
 	JPanel painel_2 = null; 
 	JPanel painel_3= null; 
@@ -25,34 +38,33 @@ public class TelaNovaContaADM implements Ouvinte{
 	JTextField inpNome = null;
 	JTextField inpEmail = null;
 	JPasswordField inpSenha = null;
-	JButton bntCadastrar = null; //Cadastrar
-	JButton bntVoltar = null; //Voltar
+	JButton bntCadastrar = new JButton("Cadastrar >>"); //Cadastrar
+	JButton bntVoltar = new JButton("<< Voltar"); //Voltar
 	
 	public TelaNovaContaADM() {}
 	
 	
 	public void desenharTela() {
-		JFrame j = new JFrame();
 		
-		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
+		setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
 		
-		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		j.setSize(540,400);
-		j.setLayout(null);
-		j.setResizable(false);
-		j.setTitle("~Nova Conta ADM~");
-		j.setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(540,400);
+		setLayout(null);
+		setResizable(false);
+		setTitle("~Nova Conta ADM~");
+		setLocationRelativeTo(null);
 		
-		adicionarComponetes_1(j);
-		adicionarComponetes_2(j);
+		adicionarComponetes_1(this);
+		adicionarComponetes_2(this);
 		
-		Ouvinte ouvinte = new OuvinteADM(new TelaLogin(), j);
+		Ouvinte ouvinte = new OuvinteADM(new TelaLogin(), this);
 		bntVoltar.addActionListener((ActionListener)ouvinte);
 		
-		ouvinte = new OuvinteADM(new TelaADM(), j);
+		ouvinte = new OuvinteADM(new TelaLogin(), this);
 		bntCadastrar.addActionListener((ActionListener)ouvinte);
 		
-		j.setVisible(true);
+		setVisible(true);
 		
 	}
 	
@@ -108,8 +120,6 @@ public class TelaNovaContaADM implements Ouvinte{
 				
 		painel_5 = painel(j,new Color(255,255,255,0));
 		painel_5.setBounds(0,painel_1.getHeight()*7, j.getWidth(), painel_1.getHeight());
-		bntCadastrar = new JButton("Cadastrar >>");
-		bntVoltar = new JButton("<< Voltar");
 		painel_5.add(bntVoltar);
 		painel_5.add(bntCadastrar);
 		

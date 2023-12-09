@@ -9,13 +9,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 
-public class TelaNovoFornecedor {
+import Controler.Ouvinte;
+
+public class TelaNovoFornecedor extends JFrame implements Ouvinte{
 	
 	JPanel painel_1 = null; 
 	JPanel painel_2 = null; 
@@ -39,20 +39,22 @@ public class TelaNovoFornecedor {
 	JButton bnt = null;
 	
 	public TelaNovoFornecedor() {
-		JFrame j = new JFrame();
+	}
+	public void desenharTela() {
 		
-		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
+		setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
 		
-		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		j.setSize(540,400);
-		j.setLayout(null);
-		j.setResizable(false);
-		j.setTitle("~Novo Fornecedor~");
-		j.setLocationRelativeTo(null);
-		adicionarComponetes_1(j);
-		adicionarComponetes_2(j);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(540,400);
+		setLayout(null);
+		setResizable(false);
+		setTitle("~Novo Fornecedor~");
+		setLocationRelativeTo(null);
+		adicionarComponetes_1(this);
+		adicionarComponetes_2(this);
 		
-		j.setVisible(true);
+		setVisible(true);
+
 	}
 	
 	JLabel titulo(JFrame j, String t) { 
