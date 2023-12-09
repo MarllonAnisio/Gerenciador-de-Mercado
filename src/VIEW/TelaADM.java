@@ -16,11 +16,11 @@ import javax.swing.JPanel;
 import Controler.Ouvinte;
 import Controler.OuvinteADM;
 
-public class TelaADM implements Ouvinte{
+public class TelaADM extends JFrame implements Ouvinte{
 	
 	JMenuItem itemNovoClente = new JMenuItem("Nova Cliente");
-	JMenuItem itemNovoFornecedor = new JMenuItem("Nova Fornecedor");
-	JMenuItem itemNovoProduto = new JMenuItem("Nova Produto");
+	JMenuItem itemNovoFornecedor = new JMenuItem("Novo Fornecedor");
+	JMenuItem itemNovoProduto = new JMenuItem("Novo Produto");
 	
 	JMenuItem itemRelatorio = new JMenuItem("Relatório");
 	JMenuItem itemVender = new JMenuItem("Vender");
@@ -35,28 +35,27 @@ public class TelaADM implements Ouvinte{
 	
 	
 	public void desenharTela() {
-		JFrame j = new JFrame();
 		
-		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado_2.jpg"));
+		setContentPane(new ImagemPanel("src/VIEW/super-mercado_2.jpg"));
 		
-		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		j.setSize(540,400);
-		j.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(540,400);
+		setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 		
-		j.setResizable(false);
-		j.setTitle("~Administrador~");
-		j.setLocationRelativeTo(null);
-		adicionarComponetes_1(j);
+		setResizable(false);
+		setTitle("~Administrador~");
+		setLocationRelativeTo(null);
+		adicionarComponetes_1(this);
 		
-		Ouvinte ouvinte = new OuvinteADM(new TelaLogin(), j);
+		Ouvinte ouvinte = new OuvinteADM(new TelaLogin(), this);
 		
-		j.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		j.addWindowListener((WindowListener)ouvinte);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener((WindowListener)ouvinte);
 		
-		ouvinte = new OuvinteADM(new TelaNovoCliente(), j);
-		itemNovoClente.addActionListener((ActionListener)ouvinte);
+		ouvinte = new OuvinteADM(new TelaNovoCliente(), this);
+		itemNovoFornecedor.addActionListener((ActionListener)ouvinte);
 		
-		j.setVisible(true);
+		setVisible(true);
 		
 	}
 	

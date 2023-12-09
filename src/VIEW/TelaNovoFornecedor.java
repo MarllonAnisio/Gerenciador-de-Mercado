@@ -2,6 +2,7 @@ package VIEW;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,13 +10,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 
-public class TelaNovoFornecedor {
+import Controler.Ouvinte;
+import Controler.OuvinteADM;
+
+public class TelaNovoFornecedor extends JFrame implements Ouvinte{
 	
 	JPanel painel_1 = null; 
 	JPanel painel_2 = null; 
@@ -32,29 +34,55 @@ public class TelaNovoFornecedor {
 	JTextArea inpDescricao = null;
 	
 	
-	JButton bntCadastrar = null;
+	JButton bntCadastrar = new JButton("Cadastrar");;
 	
 	
 	
 	JButton bnt = null;
 	
 	public TelaNovoFornecedor() {
-		JFrame j = new JFrame();
+	}
+	public void desenharTela() {
 		
-		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
+		setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
 		
-		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		j.setSize(540,400);
-		j.setLayout(null);
-		j.setResizable(false);
-		j.setTitle("~Novo Fornecedor~");
-		j.setLocationRelativeTo(null);
-		adicionarComponetes_1(j);
-		adicionarComponetes_2(j);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(540,400);
+		setLayout(null);
+		setResizable(false);
+		setTitle("~Novo Fornecedor~");
+		setLocationRelativeTo(null);
+		adicionarComponetes_1(this);
+		adicionarComponetes_2(this);
 		
-		j.setVisible(true);
+		Ouvinte ouvinte = new OuvinteADM(new TelaADM(), this);
+		bntCadastrar.addActionListener((ActionListener)ouvinte);
+		
+		
+		
+		
+		setVisible(true);
+
 	}
 	
+	public JTextField getInpNome() {
+		return inpNome;
+	}
+	public JTextField getInpTelefone() {
+		return inpTelefone;
+	}
+	public JTextField getInpCNPJ() {
+		return inpCNPJ;
+	}
+	public JTextField getInpCidade() {
+		return inpCidade;
+	}
+	public JComboBox<String> getInpHorarioFuncionamento() {
+		return inpHorarioFuncionamento;
+	}
+	public JTextArea getInpDescricao() {
+		return inpDescricao;
+	}
 	JLabel titulo(JFrame j, String t) { 
 		JLabel label = new JLabel(t);
 		return label;
@@ -144,7 +172,6 @@ public class TelaNovoFornecedor {
 		JPanel painel = painel(j,new Color(100,120,120,100));
 		painel.setBounds(0,painel_1.getHeight()*8, j.getWidth(), painel_1.getHeight());
 		
-		bntCadastrar = new JButton("Cadastrar");
 		painel.add(bntCadastrar);
 		
 	}

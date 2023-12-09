@@ -51,6 +51,7 @@ public class FacadeProj {
 	}
 	public ADM readADM(DtoUser user) {
 		a =  a.readUser(user);
+		System.out.println(a.getEmail());
 		if(a != null) {
 			return a;
 		}

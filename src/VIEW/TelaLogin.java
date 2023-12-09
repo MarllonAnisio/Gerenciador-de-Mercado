@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import Controler.Ouvinte;
 import Controler.OuvinteADM;
 
-public class TelaLogin implements Ouvinte {
+public class TelaLogin extends JFrame implements Ouvinte {
 	// Primeira tela do Projeto
 
 	JPanel painel_1 = null;
@@ -27,7 +27,7 @@ public class TelaLogin implements Ouvinte {
 	JPanel painel_5 = null;
 	JTextField inpEmail = null;
 	JPasswordField inpSenha = null;
-	JButton bnt = null;
+	JButton bntAcessar = new JButton("Acessar");;
 	JLabel novaConta = new JLabel("Nova conta");
 
 	public TelaLogin() {
@@ -35,24 +35,24 @@ public class TelaLogin implements Ouvinte {
 	}
 
 	public void desenharTela() {
-		JFrame j = new JFrame();
-		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado_2.jpg"));
-		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		j.setSize(540, 400);
-		j.setLayout(null);
-		j.setResizable(false);
-		j.setTitle("~Login~");
-		j.setLocationRelativeTo(null);
-		adicionarComponetes_1(j);
-		adicionarComponetes_2(j);
 
-		Ouvinte ouvinte = new OuvinteADM(new TelaADM(), j);
-		bnt.addActionListener((ActionListener) ouvinte);
+		setContentPane(new ImagemPanel("src/VIEW/super-mercado_2.jpg"));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(540, 400);
+		setLayout(null);
+		setResizable(false);
+		setTitle("~Login~");
+		setLocationRelativeTo(null);
+		adicionarComponetes_1(this);
+		adicionarComponetes_2(this);
 
-		ouvinte = new OuvinteADM(new TelaNovaContaADM(), j);
+		Ouvinte ouvinte = new OuvinteADM(new TelaADM(), this);
+		bntAcessar.addActionListener((ActionListener) ouvinte);
+
+		ouvinte = new OuvinteADM(new TelaNovaContaADM(), this);
 		novaConta.addMouseListener((MouseListener) ouvinte);
 
-		j.setVisible(true);
+		setVisible(true);
 
 	}
 
@@ -116,8 +116,7 @@ public class TelaLogin implements Ouvinte {
 
 		JPanel painel_5 = painel(j, new Color(255, 255, 255, 0));
 		painel_5.setBounds(0, painel_1.getHeight() * 7, j.getWidth(), painel_1.getHeight());
-		bnt = new JButton("Acessar");
-		painel_5.add(bnt);
+		painel_5.add(bntAcessar);
 
 	}
 
@@ -145,4 +144,10 @@ public class TelaLogin implements Ouvinte {
 		return p;
 	}
 
+	public JTextField getInpEmail() {
+		return inpEmail;
+	}
+	public JPasswordField getInpSenha() {
+		return inpSenha;
+	}
 }
