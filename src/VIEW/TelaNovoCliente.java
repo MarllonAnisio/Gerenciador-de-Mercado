@@ -2,21 +2,21 @@ package VIEW;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import Controler.OuvinteCadastrarCliente;
-import Controler.OuvinteVoltarTelaADM;
-import Controler.OuvinteVoltarTelaLogin;
+import Controler.Ouvinte;
+import Controler.OuvinteADM;
+import Controler.OuvinteCliente;
 
-public class TelaNovoCliente {
+public class TelaNovoCliente implements Ouvinte{
 	
 	JPanel painel_1 = null; 
 	JPanel painel_2 = null; 
@@ -32,16 +32,16 @@ public class TelaNovoCliente {
 	JRadioButton inpFeminino = null;
 	JRadioButton inpOutro = null;
 	
-	
-	
 	JButton bnt = new JButton("Cadastrar");
 	JButton bntVoltar = new JButton("Voltar");
 	
 	public TelaNovoCliente() {
+	}
+	
+	public void desenharTela() {
+
 		JFrame j = new JFrame();
-		
 		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
-		
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setSize(540,400);
 		j.setLayout(null);
@@ -51,11 +51,8 @@ public class TelaNovoCliente {
 		adicionarComponetes_1(j);
 		adicionarComponetes_2(j);
 		
-		OuvinteCadastrarCliente n = new OuvinteCadastrarCliente(j);
-		bnt.addActionListener(n);
-		
-		OuvinteVoltarTelaADM n2 = new OuvinteVoltarTelaADM(j);
-		bntVoltar.addActionListener(n2);
+		Ouvinte ouvinte = new OuvinteCliente(new TelaADM(), j);
+		bntVoltar.addActionListener((ActionListener)ouvinte);
 		
 		j.setVisible(true);
 	}

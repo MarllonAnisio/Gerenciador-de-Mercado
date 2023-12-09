@@ -2,7 +2,7 @@ package VIEW;
 
 
 
-import DAO.Persistencia;
+import DAO.CentralDeInformacoes;
 import DTO.DtoUser;
 import Model.ADM;
 import Model.Fabrica;
@@ -12,13 +12,12 @@ public class MainBackTest {
 
 	public static void main(String[] args) {
 		//Fabrica f = new FabricaFornecedor();
-
 		//Fabrica a = new FabricaCliente();
 		Fabrica b = new FabricaADM();
 
 		DtoUser b1 = new DtoUser("Jonas", "marllon@gmail.com", "12se45aa");
 		Pessoa c = new ADM(b1);
-		//c.criarUser(c);
+		c.criarUser(c);
 		//p.salvarCentral(h, "Central");
 		
 		System.out.print(b.criar(b1));

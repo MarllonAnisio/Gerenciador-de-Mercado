@@ -2,6 +2,7 @@ package VIEW;
 
 public class Programa {
 	public static void main(String[] args) {
-		new TelaLogin();
+		TelaLogin t = new TelaLogin();
+		t.desenharTela();
 	}
 }

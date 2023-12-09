@@ -2,10 +2,8 @@ package VIEW;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,11 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import Controler.OuvinteCadastrarADM;
-import Controler.OuvinteNovoADM;
-import Controler.OuvinteVoltarTelaLogin;
+import Controler.Ouvinte;
+import Controler.OuvinteADM;
 
-public class TelaNovaContaADM {
+public class TelaNovaContaADM implements Ouvinte{
 	
 	JPanel painel_1 = null; 
 	JPanel painel_2 = null; 
@@ -31,9 +28,10 @@ public class TelaNovaContaADM {
 	JButton bntCadastrar = null; //Cadastrar
 	JButton bntVoltar = null; //Voltar
 	
-	String bancoDeDados;//Aqui o bd sera armazenado para validar os dados do adm? É uma boa deixar aqui?
+	public TelaNovaContaADM() {}
 	
-	public TelaNovaContaADM() {
+	
+	public void desenharTela() {
 		JFrame j = new JFrame();
 		
 		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado.jpg"));
@@ -48,14 +46,14 @@ public class TelaNovaContaADM {
 		adicionarComponetes_1(j);
 		adicionarComponetes_2(j);
 		
-		OuvinteVoltarTelaLogin n = new OuvinteVoltarTelaLogin(j);
-		bntVoltar.addActionListener(n);
+		Ouvinte ouvinte = new OuvinteADM(new TelaLogin(), j);
+		bntVoltar.addActionListener((ActionListener)ouvinte);
 		
-		OuvinteCadastrarADM n2 = new OuvinteCadastrarADM(j);
-		bntCadastrar.addActionListener(n2);
-		
+		ouvinte = new OuvinteADM(new TelaADM(), j);
+		bntCadastrar.addActionListener((ActionListener)ouvinte);
 		
 		j.setVisible(true);
+		
 	}
 	
 	JLabel titulo(JFrame j, String t) { 
