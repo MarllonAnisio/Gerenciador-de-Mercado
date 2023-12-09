@@ -3,39 +3,38 @@ package VIEW;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Controler.OuvinteCloseADM;
-import Controler.OuvinteNovoCliente;
+import Controler.Ouvinte;
+import Controler.OuvinteADM;
 
-public class TelaADM {
+public class TelaADM implements Ouvinte{
 	
 	JMenuItem itemNovoClente = new JMenuItem("Nova Cliente");
 	JMenuItem itemNovoFornecedor = new JMenuItem("Nova Fornecedor");
 	JMenuItem itemNovoProduto = new JMenuItem("Nova Produto");
 	
-	JMenuItem itemEstoque = new JMenuItem("Estoque");
 	JMenuItem itemRelatorio = new JMenuItem("Relatório");
-	JMenuItem itemHistorioVend = new JMenuItem("Histórico de Vendas");
 	JMenuItem itemVender = new JMenuItem("Vender");
 	JMenuItem itemComprar = new JMenuItem("Comprar");
 	
 	JMenuItem itemEditFornecedor = new JMenuItem("Fornecedor");
 	JMenuItem itemEditCliente = new JMenuItem("Cliente");
 	JMenuItem itemEditProdFornece = new JMenuItem("Produto do Fornecedor");
-	JMenuItem itemEditProdMercad = new JMenuItem("Produto do Mercado");
 	
 	
-	public TelaADM() {
+	public TelaADM() {}
+	
+	
+	public void desenharTela() {
 		JFrame j = new JFrame();
 		
 		j.setContentPane(new ImagemPanel("src/VIEW/super-mercado_2.jpg"));
@@ -48,20 +47,19 @@ public class TelaADM {
 		j.setTitle("~Administrador~");
 		j.setLocationRelativeTo(null);
 		adicionarComponetes_1(j);
-		//adicionarComponetes_2(j);
 		
+		Ouvinte ouvinte = new OuvinteADM(new TelaLogin(), j);
 		
-		OuvinteCloseADM close = new OuvinteCloseADM(j);
-		j.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita o fechamento direto
-        j.addWindowListener(close);
-
-        OuvinteNovoCliente n = new OuvinteNovoCliente(j);
-        itemNovoClente.addActionListener(n);
+		j.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		j.addWindowListener((WindowListener)ouvinte);
 		
-		
+		ouvinte = new OuvinteADM(new TelaNovoCliente(), j);
+		itemNovoClente.addActionListener((ActionListener)ouvinte);
 		
 		j.setVisible(true);
+		
 	}
+	
 	
 	JLabel titulo(JFrame j, String t) { 
 		JLabel label = new JLabel(t);
@@ -88,11 +86,9 @@ public class TelaADM {
 		JMenu opFinancas = new JMenu("Finanças");
 		opFile.setFont(new Font("Arial",Font.BOLD,12));
 		
-		opFinancas.add(itemEstoque);
 		menu.add(opFinancas);
 		opFinancas.add(itemRelatorio);
 		menu.add(opFinancas);
-		opFinancas.add(itemHistorioVend);
 		menu.add(opFinancas);
 		opFinancas.add(itemVender);
 		menu.add(opFinancas);
@@ -109,7 +105,6 @@ public class TelaADM {
 		menu.add(opEditar);
 		opEditar.add(itemEditProdFornece);
 		menu.add(opEditar);
-		opEditar.add(itemEditProdMercad);
 		menu.add(opEditar);
 		
 	
