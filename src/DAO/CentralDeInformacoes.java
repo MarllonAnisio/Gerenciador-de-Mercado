@@ -59,28 +59,28 @@ public class CentralDeInformacoes {
 		return instance;
 	}
 
-	public boolean checagemClientes(Pessoa user) {
+	public boolean checagemClientes(DtoUser user) {
 		for (Cliente x : clientes) {
-			if (user.getEmail().equals(x.getEmail())) {
+			if (x.getCpf() == user.getCpf()) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean checagemFornecedores(Pessoa user) {
-		for (Fornecedor x : fornecedores) {
-			if (user.getEmail().equals(x.getEmail())) {
+	public boolean checagemFornecedores(DtoUser user) {
+		for (Fornecedor fornecedor : fornecedores) {
+			if (user.getEmail().equals(fornecedor.getEmail()) || user.getCnpj() == fornecedor.getCnpj()) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean checagemADM(Pessoa user) {
-		for (ADM x : administradores) {
-			if (user.getEmail().equals(x.getEmail())) {
-				return false;
+	public boolean checagemADM(DtoUser user) {
+		for (ADM adm : administradores) {
+			if (user.getEmail().equals(adm.getEmail()) && adm.getSenha().equals(user.getSenha())) {
+				return true;
 			}
 		}
 		return false;
@@ -107,8 +107,8 @@ public class CentralDeInformacoes {
 	}
 
 	public boolean adicionarFornecedor(Pessoa user) {
-		for (Fornecedor x : fornecedores) {
-			if (user.getEmail().equals(x.getEmail())) {
+		for (Fornecedor fornecedor : fornecedores) {
+			if (user.getEmail().equals(fornecedor.getEmail()) && fornecedor.getSenha().equals(user.getSenha())) {
 				return false;
 			}
 		}
@@ -204,6 +204,40 @@ public class CentralDeInformacoes {
 		}
 		return false;
 	}
+	public boolean atualizarFornecedor(Fornecedor user) {
+		for (Fornecedor x : fornecedores) {
+			if (user.getEmail().equals(x.getEmail())) {
+				fornecedores.remove(x);
+				x = (Fornecedor) user;
+				fornecedores.add(x);
+				return true;
+		}
+	}
+	return false;
+	}
+	public boolean atualizarADM(ADM user) {
+		for (ADM x : administradores) {
+			if (user.getEmail().equals(x.getEmail())) {
+				administradores.remove(x);
+				x = (ADM) user;
+				administradores.add(x);
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean atualizarCliente(Cliente user) {
+		for (Cliente x : clientes) {
+			if (user.getEmail().equals(x.getEmail())) {
+				clientes.remove(x);
+				x = (Cliente) user;
+				clientes.add(x);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	
 	public  ArrayList<Fornecedor> retornaArrayFornecedor(){
 		return getFornecedores();

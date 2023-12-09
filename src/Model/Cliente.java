@@ -33,6 +33,9 @@ public class Cliente extends Pessoa {
 	public ArrayList<Cliente> retornarArrayClientes(){
 		return banco.retornarArrayClientes();
 	}
+	public boolean procuraCliente(DtoUser user) {
+		return banco.procureCliente(user);
+	}
 
 	
 	

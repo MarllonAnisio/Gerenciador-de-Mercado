@@ -16,7 +16,7 @@ public class DtoUser {
 	/**
 	 *  construtor para receber dados futuros de ADM
 	 * */
-	public DtoUser( String nome, String email, String senha) {
+	public DtoUser(String nome, String email, String senha) {
 		this.senha = senha;
 		this.email = email;
 		this.nome = nome;
@@ -51,6 +51,12 @@ public class DtoUser {
 	
 	
 	
+	public DtoUser(String email, String senha) {
+		this.senha = senha;
+		this.email = email;
+
+	}
+
 	public String getSenha() {
 		return senha;
 	}

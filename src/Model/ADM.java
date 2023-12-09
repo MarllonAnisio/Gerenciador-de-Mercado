@@ -36,5 +36,8 @@ public class ADM  extends Pessoa{
 	public  ArrayList<ADM> retornarArrayADM(){
 		return banco.retornarArrayADM();
 	}
+	public boolean procureADM(DtoUser user) {
+		return banco.procureADM(user);
+	}
 }
 

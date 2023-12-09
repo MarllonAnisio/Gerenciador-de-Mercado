@@ -6,8 +6,8 @@ import DTO.DtoUser;
  * 
  * 
  * */
-public interface Fabrica {
-	
+public abstract class Fabrica {
+	Pessoa pessoa;
 	public abstract boolean criar(DtoUser user);
 	
 }

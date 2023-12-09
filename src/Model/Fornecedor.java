@@ -85,6 +85,9 @@ public class Fornecedor extends Pessoa {
 	/**
 	 * retornando Array de produtos
 	 * */
+	public boolean procuraFornecedor(DtoUser user) {
+		return banco.procureFornecedor(user);
+	}
 	
 	public ArrayList<Produto> retornaArrayProdutos() {
 		return produtos;
