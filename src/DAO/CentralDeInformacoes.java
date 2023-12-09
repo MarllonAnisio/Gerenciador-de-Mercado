@@ -61,7 +61,7 @@ public class CentralDeInformacoes {
 
 	public boolean checagemClientes(DtoUser user) {
 		for (Cliente x : clientes) {
-			if (user.getEmail().equals(x.getEmail())) {
+			if (x.getCpf() == user.getCpf()) {
 				return true;
 			}
 		}
@@ -69,8 +69,8 @@ public class CentralDeInformacoes {
 	}
 
 	public boolean checagemFornecedores(DtoUser user) {
-		for (Fornecedor x : fornecedores) {
-			if (user.getEmail().equals(x.getEmail())) {
+		for (Fornecedor fornecedor : fornecedores) {
+			if (user.getEmail().equals(fornecedor.getEmail()) || user.getCnpj() == fornecedor.getCnpj()) {
 				return true;
 			}
 		}
@@ -78,9 +78,9 @@ public class CentralDeInformacoes {
 	}
 
 	public boolean checagemADM(DtoUser user) {
-		for (ADM x : administradores) {
-			if (user.getEmail().equals(x.getEmail())) {
-				return false;
+		for (ADM adm : administradores) {
+			if (user.getEmail().equals(adm.getEmail()) && adm.getSenha().equals(user.getSenha())) {
+				return true;
 			}
 		}
 		return false;
@@ -107,8 +107,8 @@ public class CentralDeInformacoes {
 	}
 
 	public boolean adicionarFornecedor(Pessoa user) {
-		for (Fornecedor x : fornecedores) {
-			if (user.getEmail().equals(x.getEmail())) {
+		for (Fornecedor fornecedor : fornecedores) {
+			if (user.getEmail().equals(fornecedor.getEmail()) && fornecedor.getSenha().equals(user.getSenha())) {
 				return false;
 			}
 		}
