@@ -7,10 +7,12 @@ import DAO.UsuarioJaCadrastradaException;
 import DTO.DtoUser;
 
 public class Cliente extends Pessoa {
-	PessoaDAO banco;
+	PessoaDAO banco = new PessoaDAO();;
 	public Cliente(DtoUser pessoa) {
 		super(pessoa);
-		banco = new PessoaDAO();
+	}
+	public Cliente() {
+		
 	}
 	/**
 	 * parte do trajeto até o banco este fará  a criação do mesmo

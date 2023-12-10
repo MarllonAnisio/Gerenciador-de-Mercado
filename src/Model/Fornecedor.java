@@ -10,13 +10,15 @@ public class Fornecedor extends Pessoa {
 
 	private ArrayList<Produto> produtos = new ArrayList<Produto>();
 	
-	PessoaDAO banco;
+	PessoaDAO banco = new PessoaDAO();
 	
 	public Fornecedor(DtoUser pessoa) {
 		super(pessoa);
-		banco = new PessoaDAO();
-	
 	}
+	public Fornecedor() {
+		
+	}
+	
 	
 	public boolean adicionarProduto(Produto prod) {
 		for(Produto produto: produtos) {

@@ -6,10 +6,14 @@ import DAO.PessoaDAO;
 import DTO.DtoUser;
 
 public class ADM  extends Pessoa{
-	PessoaDAO banco;
+	PessoaDAO banco = new PessoaDAO();
 	public ADM(DtoUser adm) {
 		super(adm);
-		banco = new PessoaDAO();
+	
+	}
+	
+	public ADM() {
+		
 	}
 
 	/**

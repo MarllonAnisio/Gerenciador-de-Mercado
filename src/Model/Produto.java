@@ -21,7 +21,9 @@ public class Produto implements ContratoProduto {
 	/**
 	 * Construtor geral de Produto, produto tem que ter todos os campos com valores pois partirá para o banco
 	 * */
-	
+	public Produto() {
+		
+	}
 	public Produto(DtoProduto prod) {
 		nameProduto = prod.getNameProduto();
 		qtdProdutos = prod.getQtdProdutos();
@@ -31,6 +33,7 @@ public class Produto implements ContratoProduto {
 		tipoDoProduto = prod.getTipoDoProduto();
 		descricao = prod.getDescricao();
 	}
+	
 	
 	/**
 	 *  parte do trajeto até o banco este fará  a criação do mesmo

@@ -32,10 +32,35 @@ public class CentralDeInformacoes {
 	private ArrayList<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 
 	private ArrayList<Produto> estoque = new ArrayList<Produto>();
-
+	
 	/**
 	 * Construtor privado pela classe ter adotado o padrao Singleton.
 	 */
+	/**
+	 * retorno da instancia, so pode haver simultaniamente 1(uma) unica central.
+	 */
+	public static CentralDeInformacoes getInstance() {
+		/**
+		 * ligação com a persistencia para receber nossa central em XMl retornando nossa
+		 * Central guardada.
+		 */
+		instance = banco.recuperarCentral("Central");
+		/**
+		 * Primeira checagem para saber se está com nossa central
+		 */
+		if (instance == null) {
+			synchronized (Persistencia.class) {
+				
+				if (instance == null) {
+					instance = new CentralDeInformacoes();
+				}
+			}
+		}
+		return instance;
+	}
+
+	
+	
 	private CentralDeInformacoes() {
 
 	}
@@ -46,6 +71,10 @@ public class CentralDeInformacoes {
 				return false;
 			}
 		}
+		if(estoque == null) {
+			estoque.add(prod);
+			return true;
+			}
 		estoque.add(prod);
 		return true;
 	}
@@ -92,28 +121,6 @@ public class CentralDeInformacoes {
 		return null;
 	}
 
-	/**
-	 * retorno da instancia, so pode haver simultaniamente 1(uma) unica central.
-	 */
-	public static CentralDeInformacoes getInstance() {
-		/**
-		 * ligação com a persistencia para receber nossa central em XMl retornando nossa
-		 * Central guardada.
-		 */
-		instance = banco.recuperarCentral("Central");
-		/**
-		 * Primeira checagem para saber se está com nossa central
-		 */
-		if (instance == null) {
-			synchronized (Persistencia.class) {
-
-				if (instance == null) {
-					instance = new CentralDeInformacoes();
-				}
-			}
-		}
-		return instance;
-	}
 
 	public boolean checagemClientes(DtoUser user) {
 		for (Cliente x : clientes) {
@@ -126,7 +133,7 @@ public class CentralDeInformacoes {
 
 	public boolean checagemFornecedores(DtoUser user) {
 		for (Fornecedor fornecedor : fornecedores) {
-			if (user.getNome().equals(user.getNome()) || user.getCnpj() == fornecedor.getCnpj()) {
+			if (user.getCnpj() == fornecedor.getCnpj()) {
 				return true;
 			}
 		}
@@ -144,37 +151,53 @@ public class CentralDeInformacoes {
 
 	public boolean adicionarCliente(Pessoa user) {
 		for (Cliente x : clientes) {
-			if (user.getEmail().equals(x.getEmail())) {
+			if (user.getCpf() == x.getCpf()) {
 				return false;
 			}
 		}
+		if(clientes == null) {
+			clientes.add((Cliente) user);
+			return true;
+			}
 		clientes.add((Cliente) user);
 		return true;
 	}
 
 	public boolean adicionarADM(Pessoa user) {
 		for (ADM x : administradores) {
+			
 			if (user.getEmail().equals(x.getEmail())) {
 				return false;
 			}
 		}
+		if(administradores == null) {
+			administradores.add((ADM) user);
+			return true;
+			}
 		administradores.add((ADM) user);
 		return true;
 	}
 
 	public boolean adicionarFornecedor(Pessoa user) {
 		for (Fornecedor fornecedor : fornecedores) {
-			if (user.getEmail().equals(fornecedor.getEmail()) && fornecedor.getSenha().equals(user.getSenha())) {
+			if (fornecedor.getCnpj() == user.getCnpj()) {
 				return false;
 			}
+			if(fornecedores == null) {
+				fornecedores.add((Fornecedor) user);
+				return true;
+				}
+			fornecedores.add((Fornecedor) user);
+			return true;
 		}
+		
 		fornecedores.add((Fornecedor) user);
 		return true;
 	}
 
 	public boolean removerCliente(DtoUser user) {
 		for (Cliente x : clientes) {
-			if (user.getEmail().equals(x.getEmail())) {
+			if (user.getCpf() == x.getCpf()) {
 				clientes.remove(x);
 				return true;
 			}
@@ -194,7 +217,7 @@ public class CentralDeInformacoes {
 
 	public boolean removerFornecedor(DtoUser user) {
 		for (Fornecedor x : fornecedores) {
-			if (user.getEmail().equals(x.getEmail())) {
+			if (user.getCnpj() == x.getCnpj()) {
 				fornecedores.remove(x);
 				return true;
 			}
@@ -204,7 +227,7 @@ public class CentralDeInformacoes {
 
 	public Cliente lerCliente(DtoUser user) {
 		for (Cliente x : clientes) {
-			if (user.getEmail().equals(x.getEmail())) {
+			if (user.getCpf() == x.getCpf()) {
 				return x;
 			}
 		}
@@ -213,7 +236,7 @@ public class CentralDeInformacoes {
 
 	public Fornecedor lerFornecedor(DtoUser user) {
 		for (Fornecedor x : fornecedores) {
-			if (user.getEmail().equals(x.getEmail())) {
+			if (user.getCnpj() == x.getCnpj()) {
 				return x;
 			}
 		}
@@ -228,41 +251,11 @@ public class CentralDeInformacoes {
 		}
 		return null;
 	}
-//	public boolean atualizar(Pessoa user) {
-//		if (user instanceof Cliente) {
-//			for (Cliente x : clientes) {
-//				if (user.getEmail().equals(x.getEmail())) {
-//					clientes.remove(x);
-//					x = (Cliente) user;
-//					clientes.add(x);
-//					return true;
-//				}
-//			}
-//		} else if (user instanceof ADM) {
-//			for (ADM x : administradores) {
-//				if (user.getEmail().equals(x.getEmail())) {
-//					administradores.remove(x);
-//					x = (ADM) user;
-//					administradores.add(x);
-//					return true;
-//				}
-//			}
-//		} else if (user instanceof Fornecedor) {
-//			for (Fornecedor x : fornecedores) {
-//				if (user.getEmail().equals(x.getEmail())) {
-//					fornecedores.remove(x);
-//					x = (Fornecedor) user;
-//					fornecedores.add(x);
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
+
 
 	public boolean atualizarFornecedor(Pessoa user) {
 		for (Fornecedor x : fornecedores) {
-			if (user.getEmail().equals(x.getEmail())) {
+			if (user.getCnpj() == x.getCnpj()) {
 				fornecedores.remove(x);
 				x = (Fornecedor) user;
 				fornecedores.add(x);
@@ -286,7 +279,7 @@ public class CentralDeInformacoes {
 
 	public boolean atualizarCliente(Pessoa user) {
 		for (Cliente x : clientes) {
-			if (user.getEmail().equals(x.getEmail())) {
+			if (user.getCpf() == x.getCpf()) {
 				clientes.remove(x);
 				x = (Cliente) user;
 				clientes.add(x);
