@@ -2,6 +2,10 @@ package Model;
 
 import DAO.ContratoProduto;
 import DAO.ProdutoDAO;
+import DAO.ProdutoNaoAtualizadoExeption;
+import DAO.ProdutoNaoCadastradoException;
+import DAO.ProdutoNaoExisteException;
+import DAO.UsuarioNaoEncontradaExeption;
 import DTO.DtoProduto;
 import DTO.DtoUser;
 
@@ -37,23 +41,29 @@ public class Produto implements ContratoProduto {
 	
 	/**
 	 *  parte do trajeto até o banco este fará  a criação do mesmo
+	 * @throws ProdutoNaoCadastradoException 
+	 * @throws UsuarioNaoEncontradaExeption 
 	 * */
-	public boolean criarProduto(Produto prod,DtoUser forn) {
+	public boolean criarProduto(Produto prod,DtoUser forn) throws UsuarioNaoEncontradaExeption, ProdutoNaoCadastradoException {
 		return banco.criarProduto(prod,forn);
 	}
-	/***/
-	public boolean deleteProduto(DtoProduto prod,DtoUser forn) {
+	/**
+	 * @throws UsuarioNaoEncontradaExeption 
+	 * @throws ProdutoNaoExisteException */
+	public boolean deleteProduto(DtoProduto prod,DtoUser forn) throws ProdutoNaoExisteException, UsuarioNaoEncontradaExeption {
 		return banco.deleteProduto(prod,forn);
 	}
-	/***/
-	public Produto readProduto(DtoProduto prod,DtoUser forn) {
+	/**
+	 * @throws UsuarioNaoEncontradaExeption */
+	public Produto readProduto(DtoProduto prod,DtoUser forn) throws UsuarioNaoEncontradaExeption {
 		return banco.readProduto(prod,forn);
 	}
-	/***/
-	public boolean updateProduto(Produto prod,DtoUser forn) {
-		return banco.updateProduto(prod,forn);
+	/**
+	 * @throws ProdutoNaoAtualizadoExeption 
+	 * @throws UsuarioNaoEncontradaExeption */
+	public boolean updateProduto(Produto prod,DtoUser forn) throws UsuarioNaoEncontradaExeption, ProdutoNaoAtualizadoExeption {
+		return banco.updateProduto(produto, forn);
 	}
-	
 	
 	public TipoProduto getTipoDoProduto() {
 		return tipoDoProduto;

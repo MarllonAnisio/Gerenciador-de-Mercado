@@ -1,5 +1,9 @@
 package Model;
 
+import DAO.UsuarioNaoAtualizadoException;
+import DAO.UsuarioNaoCadastradoException;
+import DAO.UsuarioNaoEncontradaExeption;
+import DAO.UsuarioNaoExistenteException;
 import DTO.DtoUser;
 
 public abstract class Pessoa {
@@ -31,23 +35,27 @@ public abstract class Pessoa {
 	}
 	/**
 	 * metodo que deverá ser sobrescrito pelas subClasses
+	 * @throws UsuarioNaoCadastradoException 
 	 */
-	public abstract boolean criarUser(Pessoa user);
+	public abstract boolean criarUser(Pessoa user) throws UsuarioNaoCadastradoException;
 
 	/**
 	 * metodo que deverá ser sobrescrito pelas subClasses
+	 * @throws UsuarioNaoExistenteException 
 	 */
-	public abstract boolean deleteUser(DtoUser pessoa);
+	public abstract boolean deleteUser(DtoUser pessoa) throws UsuarioNaoExistenteException;
 
 	/**
 	 * metodo que deverá ser sobrescrito pelas subClasses
+	 * @throws UsuarioNaoEncontradaExeption 
 	 */
-	public abstract Pessoa readUser(DtoUser pessoa);
+	public abstract Pessoa readUser(DtoUser pessoa) throws UsuarioNaoEncontradaExeption;
 
 	/**
 	 * metodo que deverá ser sobrescrito pelas subClasses
+	 * @throws UsuarioNaoAtualizadoException 
 	 */
-	public abstract boolean updateUser(Pessoa Pessoa);
+	public abstract boolean updateUser(Pessoa Pessoa) throws UsuarioNaoAtualizadoException;
 
 	public String getSenha() {
 		return senha;

@@ -1,4 +1,4 @@
-package Controler;
+package DAO;
 
 public class ProdutoNaoEncontradoException extends Exception{
 

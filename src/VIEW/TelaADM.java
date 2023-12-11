@@ -31,7 +31,9 @@ public class TelaADM extends JFrame implements Ouvinte{
 	JMenuItem itemEditProdFornece = new JMenuItem("Produto do Fornecedor");
 	
 	
-	public TelaADM() {}
+	public TelaADM() {
+		
+	}
 	
 	
 	public void desenharTela() {
@@ -70,7 +72,7 @@ public class TelaADM extends JFrame implements Ouvinte{
 		JMenuBar menu = new JMenuBar();
 		j.add(menu);
 		
-		JMenu opFile = new JMenu("File");
+		JMenu opFile = new JMenu("Recursos");
 		opFile.setFont(new Font("Arial",Font.BOLD,12));
 		
 		opFile.add(itemNovoClente);
@@ -82,7 +84,8 @@ public class TelaADM extends JFrame implements Ouvinte{
 		
 		
 		
-		JMenu opFinancas = new JMenu("Finanças");
+		
+		JMenu opFinancas = new JMenu("Pesquisa");
 		opFile.setFont(new Font("Arial",Font.BOLD,12));
 		
 		menu.add(opFinancas);
@@ -95,7 +98,7 @@ public class TelaADM extends JFrame implements Ouvinte{
 		menu.add(opFinancas);
 		
 		
-		JMenu opEditar = new JMenu("Editar");
+		JMenu opEditar = new JMenu("Loja");
 		opFile.setFont(new Font("Arial",Font.BOLD,12));
 		
 		opEditar.add(itemEditFornecedor);

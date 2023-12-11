@@ -8,42 +8,56 @@ import Model.Produto;
 public class LojaDAO {
 
 	CentralDeInformacoes CDI = CentralDeInformacoes.getInstance();
-
-	public boolean addProduto(Produto prod) {
+	Produto produto;
+//	ProdutoNaoExisteException
+//	ProdutoNaoEncontradoException
+//	ProdutoNaoAtualizadoExeption
+//	throws ProdutoNaoCadastradoException
+	
+	public void setSaldo(double saldo) {
 		
+	}
+	public boolean addProduto(Produto prod) throws ProdutoNaoCadastradoException{
 		if (CDI.criarProduto(prod)) {
 			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
-		return false;
+	
+		throw new  ProdutoNaoCadastradoException();
 	}
 
-	public boolean checarProduto(DtoProduto prod) {
+	public boolean checarProduto(DtoProduto prod) throws ProdutoNaoEncontradoException {
 		if(CDI.checarProduto(prod)) {
 			return true;
 		}
-		return false;
+		throw new ProdutoNaoEncontradoException();
 	}
-	public Produto lerproduto(DtoProduto prod) {
-		return CDI.lerProduto(prod);
+	
+	public Produto lerproduto(DtoProduto prod) throws ProdutoNaoEncontradoException{
+		produto = CDI.lerProduto(prod);
+		if(produto != null) {
+			return produto;
+		}
+		throw new ProdutoNaoEncontradoException();
 	}
-	public boolean removerProduto(DtoProduto prod) {
+	
+	public boolean removerProduto(DtoProduto prod) throws ProdutoNaoExisteException {
 		if (CDI.deletarProduto(prod)) {
 			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
-		return false;
+		throw new ProdutoNaoExisteException();
 	}
 	public ArrayList<Produto> retornaProdutos() {
 		return CDI.retornarProdutos();
 	}
 
-	public boolean atualizarProduto(Produto prod) {
+	public boolean atualizarProduto(Produto prod) throws ProdutoNaoAtualizadoExeption {
 		if (CDI.atualizarProduto(prod)) {
 			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
-		return false;
+		throw new ProdutoNaoAtualizadoExeption();
 	}
 
 }

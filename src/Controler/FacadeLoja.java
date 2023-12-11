@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import DAO.UsuarioNaoCadastradoException;
+import DAO.UsuarioNaoEncontradaExeption;
+import DAO.UsuarioNaoExistenteException;
 import DTO.DtoProduto;
 import DTO.DtoUser;
 import Model.ADM;
@@ -25,36 +28,75 @@ public class FacadeLoja {
 	
 	public boolean criarADM(DtoUser user) {
 		fabrica = new Fabrica();
-		return fabrica.criarTipoPessoa(user, "ADM");
+		try {
+			return fabrica.criarTipoPessoa(user, "ADM");
+		} catch (UsuarioNaoCadastradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
+	}
 	public boolean criarCliente(DtoUser user) {
 		fabrica = new Fabrica();
-		return fabrica.criarTipoPessoa(user, "CLIENTE");
+		try {
+			return fabrica.criarTipoPessoa(user, "CLIENTE");
+		} catch (UsuarioNaoCadastradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	public boolean criarFornecedor(DtoUser user) {
 		fabrica = new Fabrica();
-		return fabrica.criarTipoPessoa(user, "FORNECEDOR");
+		try {
+			return fabrica.criarTipoPessoa(user, "FORNECEDOR");
+		} catch (UsuarioNaoCadastradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	public boolean procureADM(DtoUser user) {
 		adm = new ADM();
-		return adm.procureADM(user);
+		try {
+			return adm.procureADM(user);
+		} catch (UsuarioNaoEncontradaExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	
 	
 	public boolean deleteUserADM(DtoUser person) {
-		adm.deleteUser(person);
+		try {
+			adm.deleteUser(person);
+		} catch (UsuarioNaoExistenteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return false;
 	}
 
 	public boolean deleteUserCliente(DtoUser person) {
-		c.deleteUser(person);
+		try {
+			c.deleteUser(person);
+		} catch (UsuarioNaoExistenteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
 	public Cliente readCliente(DtoUser user) {
-		c =   (Cliente) c.readUser(user);
+		try {
+			c =   (Cliente) c.readUser(user);
+		} catch (UsuarioNaoEncontradaExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(c != null) {
 			return c;
 		}
@@ -62,7 +104,12 @@ public class FacadeLoja {
 		
 	}
 	public ADM readADM(DtoUser user) {
-		adm =  adm.readUser(user);
+		try {
+			adm =  adm.readUser(user);
+		} catch (UsuarioNaoEncontradaExeption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	//	System.out.println(a.getEmail());
 		if(adm != null) {
 			return adm;

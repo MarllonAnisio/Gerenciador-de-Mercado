@@ -18,6 +18,7 @@ import Model.Produto;
 public class CentralDeInformacoes {
 	private volatile static CentralDeInformacoes instance;
 	private static Persistencia banco = new Persistencia();
+	private double saldo;
 	/**
 	 * Array que armazena todos os nossos Administradores.
 	 */
@@ -64,6 +65,7 @@ public class CentralDeInformacoes {
 	private CentralDeInformacoes() {
 
 	}
+	
 
 	public boolean criarProduto(Produto prod) {
 		for (Produto x : estoque) {
@@ -318,10 +320,6 @@ public class CentralDeInformacoes {
 		return clientes;
 	}
 
-	public void setClientes(Cliente x) {
-		clientes.add(x);
-	}
-
 	public ArrayList<Fornecedor> getFornecedores() {
 		return fornecedores;
 	}
@@ -340,5 +338,11 @@ public class CentralDeInformacoes {
 
 	public void setProdutos(ArrayList<Produto> produto) {
 		estoque = produto;
+	}
+	public double getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
 	}
 }

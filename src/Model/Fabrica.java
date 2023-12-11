@@ -1,5 +1,8 @@
 package Model;
 
+import DAO.ProdutoNaoCadastradoException;
+import DAO.UsuarioNaoCadastradoException;
+import DAO.UsuarioNaoEncontradaExeption;
 import DTO.DtoProduto;
 import DTO.DtoUser;
 /**
@@ -13,7 +16,9 @@ public  class Fabrica {
 	Loja loja;
 	TaxaReajuste taxa;
 	DtoProduto produto;
-	public  boolean criarTipoPessoa(DtoUser user, String tipo) {
+	
+	
+	public  boolean criarTipoPessoa(DtoUser user, String tipo) throws UsuarioNaoCadastradoException {
 		switch (tipo) {
 		
 		case "FORNECEDOR":
@@ -28,11 +33,11 @@ public  class Fabrica {
 		}
 		return pessoa.criarUser(pessoa);	
 	}
-	public boolean ProdutoFornecedor(DtoProduto prod,DtoUser forn) {
+	public boolean ProdutoFornecedor(DtoProduto prod,DtoUser forn) throws UsuarioNaoEncontradaExeption, ProdutoNaoCadastradoException {
 		p = new Produto();
 		return p.criarProduto(p, forn);
 	}
-	public boolean produtoLoja(DtoProduto prod) {
+	public boolean produtoLoja(DtoProduto prod) throws ProdutoNaoCadastradoException {
 		loja = new Loja();
 		taxa = new TaxaReajuste(prod);
 		produto = taxa.taxReajuste();

@@ -52,14 +52,58 @@
         <CDI reference="../../../.."/>
       </banco>
     </Model.ADM>
+    <Model.ADM>
+      <nome>julierme</nome>
+      <cpf>0</cpf>
+      <cnpj>0</cnpj>
+      <senha>12345</senha>
+      <email>julierme.batista@gmail.com</email>
+      <telefone>0</telefone>
+      <banco>
+        <CDI reference="../../../.."/>
+      </banco>
+    </Model.ADM>
+    <Model.ADM>
+      <nome>garibalda</nome>
+      <cpf>0</cpf>
+      <cnpj>0</cnpj>
+      <senha>cici</senha>
+      <email>garibalda@gmail.com</email>
+      <telefone>0</telefone>
+      <banco>
+        <CDI reference="../../../.."/>
+      </banco>
+    </Model.ADM>
+    <Model.ADM>
+      <nome>f</nome>
+      <cpf>0</cpf>
+      <cnpj>0</cnpj>
+      <senha>f</senha>
+      <email>f</email>
+      <telefone>0</telefone>
+      <banco>
+        <CDI reference="../../../.."/>
+      </banco>
+    </Model.ADM>
   </administradores>
   <clientes/>
   <fornecedores>
     <Model.Fornecedor>
-      <nome>Zé do caixão</nome>
+      <nome>Laercio </nome>
       <cpf>0</cpf>
       <cnpj>12236555</cnpj>
-      <telefone>122233344</telefone>
+      <telefone>40028922</telefone>
+      <cidade>loucuras acontecem</cidade>
+      <produtos/>
+      <banco>
+        <CDI reference="../../../.."/>
+      </banco>
+    </Model.Fornecedor>
+    <Model.Fornecedor>
+      <nome>hector bollina</nome>
+      <cpf>0</cpf>
+      <cnpj>687643304980</cnpj>
+      <telefone>40028922</telefone>
       <cidade>monteiro</cidade>
       <produtos/>
       <banco>

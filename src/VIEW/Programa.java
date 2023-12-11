@@ -1,6 +1,8 @@
 package VIEW;
 
 import Controler.FacadeLoja;
+import Controler.FachadaProdutoAndFornecedores;
+import DAO.UsuarioNaoExistenteException;
 import DTO.DtoUser;
 
 public class Programa {
@@ -8,8 +10,17 @@ public class Programa {
     TelaLogin t =	new TelaLogin();
     t.desenharTela();
     FacadeLoja p = new FacadeLoja();
-    DtoUser user = new DtoUser("marllon", "marllon.Anisio@gmail.com","12345");
-    p.criarADM(user);
+    FachadaProdutoAndFornecedores lo = new FachadaProdutoAndFornecedores();
+    DtoUser user = new DtoUser("Laercio ", 12236555, 40028922, "mangabeira", "loucuras acontecem");
+    p.criarFornecedor(user);
+    
+//    try {
+//		lo.deleteUserFornecedor(user);
+//	} catch (UsuarioNaoExistenteException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+ 
     
     
 	}

@@ -3,6 +3,10 @@ package Model;
 import java.util.ArrayList;
 
 import DAO.PessoaDAO;
+import DAO.UsuarioNaoAtualizadoException;
+import DAO.UsuarioNaoCadastradoException;
+import DAO.UsuarioNaoEncontradaExeption;
+import DAO.UsuarioNaoExistenteException;
 import DTO.DtoUser;
 
 public class ADM  extends Pessoa{
@@ -18,29 +22,28 @@ public class ADM  extends Pessoa{
 
 	/**
 	 * parte do trajeto até o banco este fará  a criação do mesmo
+	 * @throws UsuarioNaoCadastradoException 
 	 * */
-	public boolean criarUser(Pessoa user) {
+	public boolean criarUser(Pessoa user) throws UsuarioNaoCadastradoException {
 		return banco.criarUser(user);
 	}
 
 
-	public boolean deleteUser(DtoUser pessoa) {
+	public boolean deleteUser(DtoUser pessoa) throws UsuarioNaoExistenteException {
 		return banco.deleteUserADM(pessoa);
 	}
-
-
-	public ADM readUser(DtoUser pessoa) {
+	public ADM readUser(DtoUser pessoa) throws UsuarioNaoEncontradaExeption {
 		return banco.readADM(pessoa);
 	}
 
-	public boolean updateUser(Pessoa Pessoa) {
+	public boolean updateUser(Pessoa Pessoa) throws UsuarioNaoAtualizadoException {
 		return banco.atualizarADM(Pessoa);
 	}
 
 	public  ArrayList<ADM> retornarArrayADM(){
 		return banco.retornarArrayADM();
 	}
-	public boolean procureADM(DtoUser user) {
+	public boolean procureADM(DtoUser user) throws UsuarioNaoEncontradaExeption {
 		return banco.procureADM(user);
 	}
 }
