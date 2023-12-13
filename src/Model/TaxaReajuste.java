@@ -4,20 +4,18 @@ import DTO.DtoProduto;
 
 public class TaxaReajuste {
 
-	private DtoProduto produto;
-
 	/**
 	 * requisito funcional nosso que nos ajuda na hora de reestabelecer os precos na
 	 * hora da criação
 	 */
-	public TaxaReajuste(DtoProduto prod) {
-		setProduto(prod);
+	public TaxaReajuste() {
+		
 	}
 
 	/**
 	 * metodo que faz o reajuste nos valoes do produto.
 	 */
-	public DtoProduto taxReajuste() {
+	public DtoProduto taxReajuste(DtoProduto produto) {
 		if (produto.getTipoDoProduto() == TipoProduto.ALIMENTOS) {
 			produto.setValorProduto(produto.getValorProduto() * 1.20);
 		} else if (produto.getTipoDoProduto() == TipoProduto.BEBIDAS) {
@@ -33,12 +31,5 @@ public class TaxaReajuste {
 		return produto;
 	}
 
-	public DtoProduto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(DtoProduto produto) {
-		this.produto = produto;
-	}
 
 }

@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 import DAO.PessoaDAO;
-import DAO.ProdutoDAO;
+import DAO.ProdutoDoFornecedorDAO;
 import DAO.ProdutoNaoEncontradoException;
 import DAO.UsuarioNaoAtualizadoException;
 import DAO.UsuarioNaoCadastradoException;
@@ -16,10 +16,10 @@ public class Fornecedor extends Pessoa {
 
 	private ArrayList<Produto> produtos = new ArrayList<Produto>();
 	
-	PessoaDAO banco = new PessoaDAO();
-	ProdutoDAO produto = new ProdutoDAO();
-	Produto produtop;
-	Fornecedor fornecedor;
+	private PessoaDAO banco = new PessoaDAO();
+	private ProdutoDoFornecedorDAO produto = new ProdutoDoFornecedorDAO();
+	private Produto produtop;
+	private Fornecedor fornecedor;
 	public Fornecedor(DtoUser pessoa) {
 		super(pessoa);
 	}
@@ -83,7 +83,7 @@ public class Fornecedor extends Pessoa {
 	}
 	
 	public Produto checarProdutoR(DtoProduto prod, DtoUser forn ) throws UsuarioNaoEncontradaExeption {
-		fornecedor = banco.readFornecedor(forn);
+		fornecedor = banco.lerFornecedor(forn);
 		if(fornecedor != null) {
 			for(Produto x: produtos) {
 				if(x.getNameProduto().equals(prod)) {
@@ -102,18 +102,16 @@ public class Fornecedor extends Pessoa {
 	 * @throws UsuarioNaoCadastradoException 
 	 * 
 	 * */
-	public boolean criarUser(Pessoa cliente) throws UsuarioNaoCadastradoException{
-		return banco.criarUser(cliente);
-	}
+	
 	public boolean deleteUser(DtoUser pessoa) throws UsuarioNaoExistenteException {
-		return banco.deleteUserFornecedor(pessoa);
+		return banco.removerFornecedor(pessoa);
 	}
 	
 	public Pessoa readUser(DtoUser pessoa) throws UsuarioNaoEncontradaExeption {
-		return banco.readFornecedor(pessoa);
+		return banco.lerFornecedor(pessoa);
 	}
 	
-	public boolean updateUser(Pessoa pessoa) throws UsuarioNaoAtualizadoException {
+	public boolean updateUser(Pessoa pessoa) throws UsuarioNaoAtualizadoException, UsuarioNaoEncontradaExeption {
 		if(banco.atualizarFornecedor(pessoa)) {
 			return true;
 		}
@@ -124,7 +122,7 @@ public class Fornecedor extends Pessoa {
 	 * @throws UsuarioNaoEncontradaExeption 
 	 * */
 	public boolean procuraFornecedor(DtoUser user) throws UsuarioNaoEncontradaExeption {
-		return banco.procureFornecedor(user);
+		return banco.checagemFornecedores(user);
 	}
 	
 	public ArrayList<Produto> retornaArrayProdutos() {

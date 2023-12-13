@@ -9,127 +9,194 @@ import Model.Fornecedor;
 import Model.Pessoa;
 
 public class PessoaDAO {
-	CentralDeInformacoes CDI = CentralDeInformacoes.getInstance();
-	Fornecedor f;
-	Cliente c;
-	ADM a;
+	CentralDeInformacoes CDI;
+	
 	public PessoaDAO() {
-
+		CDI = CentralDeInformacoes.getInstance();
 	}
 //	throws UsuarioNaoCadastradoException
 //	throws UsuarioNaoExistenteException
 //	throws UsuarioNaoEncontradaExeption
 //	 throws UsuarioNaoAtualizadoException
 
-	public boolean criarUser(Pessoa pessoa) throws UsuarioNaoCadastradoException{
-
-		if (pessoa instanceof Cliente) {
-			if (CDI.adicionarCliente(pessoa)) {
-				CDI.salvarCentral(CDI, "Central");
-				return true;
+	public boolean adicionarADM(Pessoa user) throws UsuarioNaoCadastradoException{
+		if(CDI.administradores == null) {
+			CDI.administradores.add((ADM) user);
+			CDI.salvarCentral(CDI, "Central");
+			return true;
 			}
-		} else if (pessoa instanceof ADM) {
-			if (CDI.adicionarADM(pessoa)) {
-				CDI.salvarCentral(CDI, "Central");
-				return true;
-			}
-		} else if (pessoa instanceof Fornecedor) {
-			if (CDI.adicionarFornecedor(pessoa)) {
-				CDI.salvarCentral(CDI, "Central");
-				return true;
+		for (ADM x : CDI.administradores) {
+			if (user.getEmail().equals(x.getEmail())) {
+				throw new  UsuarioNaoCadastradoException();
 			}
 		}
-		throw new  UsuarioNaoCadastradoException();
+		CDI.administradores.add((ADM) user);
+		CDI.salvarCentral(CDI, "Central");
+		return true;
 	}
-
-	public boolean deleteUserADM(DtoUser person) throws UsuarioNaoExistenteException{
-		if (CDI.removerADM(person)) {
+	
+	public boolean adicionarFornecedor(Pessoa user) throws UsuarioNaoCadastradoException{
+		if(CDI.fornecedores == null) {
+			CDI.fornecedores.add((Fornecedor) user);
+			CDI.salvarCentral(CDI, "Central");
+			return true;
+			}
+		for (Fornecedor fornecedor : CDI.fornecedores) {
+			if (fornecedor.getCnpj() == user.getCnpj()) {
+				throw new  UsuarioNaoCadastradoException();
+			}
+			
+			CDI.fornecedores.add((Fornecedor) user);
 			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
-		throw new UsuarioNaoExistenteException();
+		CDI.fornecedores.add((Fornecedor) user);
+		return true;
 	}
-
-	public boolean deleteUserFornecedor(DtoUser person) throws UsuarioNaoExistenteException{
-		if (CDI.removerFornecedor(person)) {
+	
+	public boolean adicionarCliente(Pessoa user) throws UsuarioNaoCadastradoException{
+		if(CDI.clientes == null) {
+			CDI.clientes.add((Cliente) user);
 			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
-		throw new  UsuarioNaoExistenteException();	}
+		
+		for (Cliente x : CDI.clientes) {
+			if (user.getCpf() == x.getCpf()) {
+				throw new  UsuarioNaoCadastradoException();
+			}
+		}
+		CDI.clientes.add((Cliente) user);
+		CDI.salvarCentral(CDI, "Central");
+		return true;
+	}
+	
+	
 
-	public boolean deleteUserCliente(DtoUser person) throws UsuarioNaoExistenteException {
-		if (CDI.removerCliente(person)) {
-			CDI.salvarCentral(CDI, "Central");
-			return true;
+	public boolean removerCliente(DtoUser user) throws  UsuarioNaoExistenteException{
+		for (Cliente x : CDI.clientes) {
+			if (user.getCpf() == x.getCpf()) {
+				CDI.clientes.remove(x);
+				return true;
+			}
 		}
 		throw new  UsuarioNaoExistenteException();
 	}
 
-	public Fornecedor readFornecedor(DtoUser user) throws UsuarioNaoEncontradaExeption{
-		f = CDI.lerFornecedor(user);
-		if(f != null) {
-			return f;
+	public boolean removerADM(DtoUser user)  throws  UsuarioNaoExistenteException{
+		for (ADM x : CDI.administradores) {
+			if (user.getEmail().equals(x.getEmail())) {
+				CDI.administradores.remove(x);
+				return true;
+			}
+		}
+		throw new  UsuarioNaoExistenteException();
+	}
+
+	public boolean removerFornecedor(DtoUser user) throws  UsuarioNaoExistenteException {
+		for (Fornecedor x : CDI.fornecedores) {
+			if (user.getCnpj() == x.getCnpj()) {
+				CDI.fornecedores.remove(x);
+				return true;
+			}
+		}
+		throw new  UsuarioNaoExistenteException();
+	}
+	
+	public Cliente lerCliente(DtoUser user) throws UsuarioNaoEncontradaExeption{
+		for (Cliente x : CDI.clientes) {
+			if (user.getCpf() == x.getCpf()) {
+				return x;
+			}
 		}
 		throw new UsuarioNaoEncontradaExeption();
 	}
 
-	public Cliente readCliente(DtoUser user) throws UsuarioNaoEncontradaExeption{
-		c =CDI.lerCliente(user);
-		if(c != null) {
-			return c;
-		}
-		throw new UsuarioNaoEncontradaExeption();
-
-	}
-
-	public ADM readADM(DtoUser user) throws UsuarioNaoEncontradaExeption{
-		a =  CDI.lerADM(user);
-		if(a != null) {
-			return a;
-		}
-		throw new UsuarioNaoEncontradaExeption();
-	}
-
-	public boolean atualizarFornecedor(Pessoa user) throws UsuarioNaoAtualizadoException {
-		if(CDI.atualizarFornecedor(user)) {
-			CDI.salvarCentral(CDI, "Central");
-			return true;
-		}
-		throw new UsuarioNaoAtualizadoException();
-	}
-	public boolean atualizarADM(Pessoa user) throws UsuarioNaoAtualizadoException{
-		if(CDI.atualizarADM(user)) {
-			CDI.salvarCentral(CDI, "Central");
-			return true;
-		}
-		throw new UsuarioNaoAtualizadoException();
-	}
-	public boolean atualizarCliente(Pessoa user) throws UsuarioNaoAtualizadoException {
-		if(CDI.atualizarCliente(user)) {
-			CDI.salvarCentral(CDI, "Central");
-			return true;
-		}
-		throw new UsuarioNaoAtualizadoException();
-	}
-	public boolean procureADM(DtoUser user) throws UsuarioNaoEncontradaExeption{
-		if(CDI.checagemADM(user)) {
-			return true;
+	public Fornecedor lerFornecedor(DtoUser user) throws UsuarioNaoEncontradaExeption {
+		for (Fornecedor x : CDI.fornecedores) {
+			if (user.getCnpj() == x.getCnpj()) {
+				return x;
+			}
 		}
 		throw new UsuarioNaoEncontradaExeption();
 		
 	}
-	public boolean procureFornecedor(DtoUser user)  throws UsuarioNaoEncontradaExeption{
-		if(CDI.checagemFornecedores(user)) {
-			return true;
+
+	public ADM lerADM(DtoUser user) throws UsuarioNaoEncontradaExeption {
+		for (ADM x : CDI.administradores) {
+			if (user.getEmail().equals(x.getEmail())) {
+				return x;
+			}
 		}
 		throw new UsuarioNaoEncontradaExeption();
 	}
-	public boolean procureCliente(DtoUser user) throws UsuarioNaoEncontradaExeption {
-		if(CDI.checagemClientes(user)) {
-		return true;
+
+	public boolean atualizarFornecedor(Pessoa user)  throws  UsuarioNaoEncontradaExeption{
+		for (Fornecedor x : CDI.fornecedores) {
+			if (user.getCnpj() == x.getCnpj()) {
+				CDI.fornecedores.remove(x);
+				x = (Fornecedor) user;
+				CDI.fornecedores.add(x);
+				CDI.salvarCentral(CDI, "Central");
+				return true;
+			}
 		}
 		throw new UsuarioNaoEncontradaExeption();
 	}
+
+	public boolean atualizarADM(Pessoa user) throws  UsuarioNaoEncontradaExeption {
+		for (ADM x : CDI.administradores) {
+			if (user.getEmail().equals(x.getEmail())) {
+				CDI.administradores.remove(x);
+				x = (ADM) user;
+				CDI.administradores.add(x);
+				CDI.salvarCentral(CDI, "Central");
+				return true;
+			}
+		}
+		throw new UsuarioNaoEncontradaExeption();
+	}
+
+	public boolean atualizarCliente(Pessoa user) throws  UsuarioNaoEncontradaExeption{
+		for (Cliente x : CDI.clientes) {
+			if (user.getCpf() == x.getCpf()) {
+				CDI.clientes.remove(x);
+				x = (Cliente) user;
+				CDI.clientes.add(x);
+				CDI.salvarCentral(CDI, "Central");
+				return true;
+			}
+		}
+		throw new UsuarioNaoEncontradaExeption();
+	}
+	
+	public boolean checagemClientes(DtoUser user)  throws UsuarioNaoEncontradaExeption {
+		for (Cliente x : CDI.clientes) {
+			if (x.getCpf() == user.getCpf()) {
+				return true;
+			}
+		}
+		throw new UsuarioNaoEncontradaExeption();
+	}
+
+	public boolean checagemFornecedores(DtoUser user) throws UsuarioNaoEncontradaExeption  {
+		for (Fornecedor fornecedor : CDI.fornecedores) {
+			if (user.getCnpj() == fornecedor.getCnpj()) {
+				return true;
+			}
+		}
+		throw new UsuarioNaoEncontradaExeption();
+	}
+
+	public boolean checagemADM(DtoUser user) throws UsuarioNaoEncontradaExeption {
+		for (ADM adm : CDI.administradores) {
+			if (user.getEmail().equals(adm.getEmail()) && adm.getSenha().equals(user.getSenha())) {
+				return true;
+			}
+		}
+		throw new UsuarioNaoEncontradaExeption();
+	}
+
 	
 	public ArrayList<Fornecedor> retornaArrayFornecedor() {
 		return CDI.retornaArrayFornecedor();
@@ -142,5 +209,6 @@ public class PessoaDAO {
 	public ArrayList<ADM> retornarArrayADM() {
 		return CDI.retornarArrayADM();
 	}
+
 
 }

@@ -24,19 +24,16 @@ public class ADM  extends Pessoa{
 	 * parte do trajeto até o banco este fará  a criação do mesmo
 	 * @throws UsuarioNaoCadastradoException 
 	 * */
-	public boolean criarUser(Pessoa user) throws UsuarioNaoCadastradoException {
-		return banco.criarUser(user);
-	}
-
+	
 
 	public boolean deleteUser(DtoUser pessoa) throws UsuarioNaoExistenteException {
-		return banco.deleteUserADM(pessoa);
+		return banco.removerADM(pessoa);
 	}
 	public ADM readUser(DtoUser pessoa) throws UsuarioNaoEncontradaExeption {
-		return banco.readADM(pessoa);
+		return banco.lerADM(pessoa);
 	}
 
-	public boolean updateUser(Pessoa Pessoa) throws UsuarioNaoAtualizadoException {
+	public boolean updateUser(Pessoa Pessoa) throws UsuarioNaoAtualizadoException, UsuarioNaoEncontradaExeption {
 		return banco.atualizarADM(Pessoa);
 	}
 
@@ -44,7 +41,7 @@ public class ADM  extends Pessoa{
 		return banco.retornarArrayADM();
 	}
 	public boolean procureADM(DtoUser user) throws UsuarioNaoEncontradaExeption {
-		return banco.procureADM(user);
+		return banco.checagemADM(user);
 	}
 }
 

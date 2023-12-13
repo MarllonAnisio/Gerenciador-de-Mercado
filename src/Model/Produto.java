@@ -1,15 +1,18 @@
 package Model;
 
-import DAO.ContratoProduto;
-import DAO.ProdutoDAO;
+
+import java.util.ArrayList;
+
+import DAO.ProdutoDoFornecedorDAO;
 import DAO.ProdutoNaoAtualizadoExeption;
 import DAO.ProdutoNaoCadastradoException;
+import DAO.ProdutoNaoEncontradoException;
 import DAO.ProdutoNaoExisteException;
 import DAO.UsuarioNaoEncontradaExeption;
 import DTO.DtoProduto;
 import DTO.DtoUser;
 
-public class Produto implements ContratoProduto {
+public class Produto  {
 
 	private String nameProduto;
 	private int validade;
@@ -20,8 +23,8 @@ public class Produto implements ContratoProduto {
 	private double peso;
 	private double valorGeral;
 	private int qtdProdutos;
-	private ProdutoDAO banco = new ProdutoDAO();
 	Produto produto;
+	ProdutoDoFornecedorDAO banco = new ProdutoDoFornecedorDAO();
 	/**
 	 * Construtor geral de Produto, produto tem que ter todos os campos com valores pois partirá para o banco
 	 * */
@@ -36,16 +39,6 @@ public class Produto implements ContratoProduto {
 		valorProduto = prod.getValorProduto();
 		tipoDoProduto = prod.getTipoDoProduto();
 		descricao = prod.getDescricao();
-	}
-	
-	
-	/**
-	 *  parte do trajeto até o banco este fará  a criação do mesmo
-	 * @throws ProdutoNaoCadastradoException 
-	 * @throws UsuarioNaoEncontradaExeption 
-	 * */
-	public boolean criarProduto(Produto prod,DtoUser forn) throws UsuarioNaoEncontradaExeption, ProdutoNaoCadastradoException {
-		return banco.criarProduto(prod,forn);
 	}
 	/**
 	 * @throws UsuarioNaoEncontradaExeption 
@@ -64,7 +57,12 @@ public class Produto implements ContratoProduto {
 	public boolean updateProduto(Produto prod,DtoUser forn) throws UsuarioNaoEncontradaExeption, ProdutoNaoAtualizadoExeption {
 		return banco.updateProduto(produto, forn);
 	}
-	
+	public ArrayList<Produto> produtosFornecedor(DtoUser user) throws UsuarioNaoEncontradaExeption{
+		return banco.retornaArrayProduto(user);
+	}
+	public boolean checagemProduto(DtoProduto prod, DtoUser user) throws ProdutoNaoEncontradoException, UsuarioNaoEncontradaExeption {
+		return banco.checarProduto(prod, user);
+	}
 	public TipoProduto getTipoDoProduto() {
 		return tipoDoProduto;
 	}

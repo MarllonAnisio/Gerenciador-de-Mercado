@@ -10,6 +10,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import DAO.UsuarioNaoEncontradaExeption;
 import DTO.DtoUser;
 import VIEW.TelaADM;
 import VIEW.TelaLogin;
@@ -21,7 +22,7 @@ public class OuvinteADM implements ActionListener, MouseListener, WindowListener
 	private Ouvinte ouvinteBnt;
 	DtoUser user;
 	FacadeLoja loja = new FacadeLoja();
-	FachadaProdutoAndFornecedores fornecedoresProdutos = new FachadaProdutoAndFornecedores();
+	
 	/**
 	 * 
 	 * @param telaPraAbrir: Use esse parametro para abrir a próxima tela
@@ -45,16 +46,16 @@ public class OuvinteADM implements ActionListener, MouseListener, WindowListener
 				user = new DtoUser(email, senha);
 				System.out.println(email.equals(""));
 				if(!email.equals("") && !senha.equals("")) {
-					if (loja.procureADM(user)) {
-						frame.dispose();
-						Ouvinte t = new TelaADM();
-						t.desenharTela();
-						System.out.println("Bem-Vindo ADM");
-					} 
-					else {
-						JOptionPane.showMessageDialog(frame, "Usuario não existe no sistema", "Usuario não encontrado", 2);
+					try {
+						loja.adm.procureADM(user);
+					} catch (UsuarioNaoEncontradaExeption e1) {
+						JOptionPane.showMessageDialog(null, "Administrador não encontrado", "ação impossivel", 2);
 					}
-				} 
+					frame.dispose();
+					Ouvinte t = new TelaADM();
+					t.desenharTela();
+					System.out.println("Bem-Vindo ADM");
+				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Preencha todos os campos em branco", "Usuario não encontrado", 2);
 				}
@@ -75,13 +76,9 @@ public class OuvinteADM implements ActionListener, MouseListener, WindowListener
 				String senha = frameTela.getInpSenha().getText();
 				user = new DtoUser(nome, email, senha);
 				if(!email.equals("") && !senha.equals("") && !nome.equals(null)) {
-					if (loja.criarADM(user)) {
-						Ouvinte te = new TelaADM();
-						te.desenharTela();
-					}
-					else {
-						JOptionPane.showMessageDialog(frame, "usuario ja cadastrado", "açao impossivel", 2);
-					}
+					loja.criarADM(user);
+					Ouvinte te = new TelaADM();
+					te.desenharTela();
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Preencha todos os campos em branco por favor", "açao impossivel", 2);
@@ -113,21 +110,16 @@ public class OuvinteADM implements ActionListener, MouseListener, WindowListener
 				
 				user = new DtoUser(nome,cnpj1 ,tell,descri,cidade);
 				if(!nome.equals("") && cnpj1 != 0 && tell != 0 && !descri.equals("") && !cidade.equals("")) {
-					if(loja.criarFornecedor(user)) {
-						frame.dispose();
-						Ouvinte te = new TelaADM();
-						te.desenharTela();
-					}	
-					else {
-						JOptionPane.showMessageDialog(frame, "usuario ja cadastrado", "açao impossivel", 2);
-					}
+					loja.criarFornecedor(user);
+					frame.dispose();
+					Ouvinte te = new TelaADM();
+					te.desenharTela();
 				}
 				else {
 					JOptionPane.showMessageDialog(frame, "Preencha todos os campos em branco por favor", "açao impossivel", 2);
 				}
 				
 			}
-
 		}
 		else if (frame instanceof TelaADM) {
 			

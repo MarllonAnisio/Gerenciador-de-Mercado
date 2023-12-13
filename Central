@@ -1,4 +1,5 @@
 <DAO.CentralDeInformacoes>
+  <saldo>0.0</saldo>
   <administradores>
     <Model.ADM>
       <cpf>0</cpf>
@@ -83,6 +84,198 @@
       <telefone>0</telefone>
       <banco>
         <CDI reference="../../../.."/>
+      </banco>
+    </Model.ADM>
+    <Model.ADM>
+      <nome>marllonho</nome>
+      <cpf>0</cpf>
+      <cnpj>0</cnpj>
+      <senha>catapimbas</senha>
+      <email>marllonho.aa@gmail.com</email>
+      <telefone>0</telefone>
+      <banco>
+        <CDI reference="../../../.."/>
+      </banco>
+    </Model.ADM>
+    <Model.ADM>
+      <nome>jonas</nome>
+      <cpf>0</cpf>
+      <cnpj>0</cnpj>
+      <senha>1</senha>
+      <email>12222</email>
+      <telefone>0</telefone>
+      <banco>
+        <CDI reference="../../../.."/>
+      </banco>
+    </Model.ADM>
+    <Model.ADM>
+      <nome>2222222</nome>
+      <cpf>0</cpf>
+      <cnpj>0</cnpj>
+      <senha>22222</senha>
+      <email>2222</email>
+      <telefone>0</telefone>
+      <banco>
+        <CDI reference="../../../.."/>
+      </banco>
+    </Model.ADM>
+    <Model.ADM>
+      <nome>JonasPortug</nome>
+      <cpf>0</cpf>
+      <cnpj>0</cnpj>
+      <senha>1444539</senha>
+      <email>jonasPortug@gmail.com</email>
+      <telefone>0</telefone>
+      <banco>
+        <CDI>
+          <saldo>0.0</saldo>
+          <administradores>
+            <Model.ADM>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>marllon</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>12345</senha>
+              <email>marllon.Anisio@gmail.com</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>a</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>a</senha>
+              <email>a</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>b</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>b</senha>
+              <email>b</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>aa</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>aa</senha>
+              <email>aa</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>julierme</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>12345</senha>
+              <email>julierme.batista@gmail.com</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>garibalda</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>cici</senha>
+              <email>garibalda@gmail.com</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>f</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>f</senha>
+              <email>f</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>marllonho</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>catapimbas</senha>
+              <email>marllonho.aa@gmail.com</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>jonas</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>1</senha>
+              <email>12222</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+            <Model.ADM>
+              <nome>2222222</nome>
+              <cpf>0</cpf>
+              <cnpj>0</cnpj>
+              <senha>22222</senha>
+              <email>2222</email>
+              <telefone>0</telefone>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.ADM>
+          </administradores>
+          <clientes/>
+          <fornecedores>
+            <Model.Fornecedor>
+              <nome>Laercio </nome>
+              <cpf>0</cpf>
+              <cnpj>12236555</cnpj>
+              <telefone>40028922</telefone>
+              <cidade>loucuras acontecem</cidade>
+              <produtos/>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.Fornecedor>
+            <Model.Fornecedor>
+              <nome>hector bollina</nome>
+              <cpf>0</cpf>
+              <cnpj>687643304980</cnpj>
+              <telefone>40028922</telefone>
+              <cidade>monteiro</cidade>
+              <produtos/>
+              <banco>
+                <CDI reference="../../../.."/>
+              </banco>
+            </Model.Fornecedor>
+          </fornecedores>
+          <estoque/>
+        </CDI>
       </banco>
     </Model.ADM>
   </administradores>

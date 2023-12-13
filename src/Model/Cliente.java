@@ -17,22 +17,16 @@ public class Cliente extends Pessoa {
 	public Cliente() {
 		
 	}
-	/**
-	 * parte do trajeto até o banco este fará  a criação do mesmo
-	 * @throws UsuarioNaoCadastradoException 
-	 * */
-	public boolean criarUser(Pessoa cliente) throws UsuarioNaoCadastradoException{
-		return banco.criarUser(cliente);
-	}
+	
 	public boolean deleteUser(DtoUser pessoa) throws UsuarioNaoExistenteException {
-		return banco.deleteUserCliente(pessoa);
+		return banco.removerCliente(pessoa);
 	}
 	
 	public Pessoa readUser(DtoUser pessoa) throws UsuarioNaoEncontradaExeption {
-		return banco.readCliente(pessoa);
+		return banco.lerCliente(pessoa);
 	}
 	
-	public boolean updateUser(Pessoa Pessoa) throws UsuarioNaoAtualizadoException {
+	public boolean updateUser(Pessoa Pessoa) throws UsuarioNaoAtualizadoException, UsuarioNaoEncontradaExeption {
 		return banco.atualizarCliente(Pessoa);
 		
 	}
@@ -40,7 +34,7 @@ public class Cliente extends Pessoa {
 		return banco.retornarArrayClientes();
 	}
 	public boolean procuraCliente(DtoUser user) throws UsuarioNaoEncontradaExeption {
-		return banco.procureCliente(user);
+		return banco.checagemClientes(user);
 	}
 
 	

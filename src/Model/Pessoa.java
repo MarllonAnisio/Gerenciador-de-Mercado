@@ -29,38 +29,15 @@ public abstract class Pessoa {
 		this.senha = pessoa.getSenha();
 		this.telefone = pessoa.getTelefone();
 		this.cidade = pessoa.getCidade();
-
+		this.descricao = pessoa.getDescricao();
+		
 	}
 	public Pessoa() {
 	}
-	/**
-	 * metodo que deverá ser sobrescrito pelas subClasses
-	 * @throws UsuarioNaoCadastradoException 
-	 */
-	public abstract boolean criarUser(Pessoa user) throws UsuarioNaoCadastradoException;
-
-	/**
-	 * metodo que deverá ser sobrescrito pelas subClasses
-	 * @throws UsuarioNaoExistenteException 
-	 */
-	public abstract boolean deleteUser(DtoUser pessoa) throws UsuarioNaoExistenteException;
-
-	/**
-	 * metodo que deverá ser sobrescrito pelas subClasses
-	 * @throws UsuarioNaoEncontradaExeption 
-	 */
-	public abstract Pessoa readUser(DtoUser pessoa) throws UsuarioNaoEncontradaExeption;
-
-	/**
-	 * metodo que deverá ser sobrescrito pelas subClasses
-	 * @throws UsuarioNaoAtualizadoException 
-	 */
-	public abstract boolean updateUser(Pessoa Pessoa) throws UsuarioNaoAtualizadoException;
-
+	
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}

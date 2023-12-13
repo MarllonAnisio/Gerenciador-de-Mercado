@@ -9,19 +9,18 @@ import DTO.DtoUser;
 import Model.Fornecedor;
 import Model.Produto;
 
-public class ProdutoDAO implements ContratoProduto{
+public class ProdutoDoFornecedorDAO {
 
 	
 	
-	CentralDeInformacoes CDI = CentralDeInformacoes.getInstance();
-	Fornecedor f;
+	PessoaDAO banco = new PessoaDAO();
+	Fornecedor fornecedor;
 	Produto p;
 	public boolean criarProduto(Produto prod, DtoUser forn) throws UsuarioNaoEncontradaExeption, ProdutoNaoCadastradoException{
-		f = CDI.lerFornecedor(forn);
-		if(f != null) {
-			if(f.adicionarProduto(prod)) {
-				if(CDI.atualizarFornecedor(f)) {
-					 CDI.salvarCentral(CDI, "Central");
+		fornecedor = banco.lerFornecedor(forn);
+		if(fornecedor != null) {
+			if(fornecedor.adicionarProduto(prod)) {
+				if(banco.atualizarFornecedor(fornecedor)) {
 					return true;
 				}
 			}
@@ -33,9 +32,9 @@ public class ProdutoDAO implements ContratoProduto{
 	}
 
 	public boolean checarProduto(DtoProduto prod, DtoUser forn) throws ProdutoNaoEncontradoException,  UsuarioNaoEncontradaExeption{
-		f = CDI.lerFornecedor(forn);
-		if(!f.equals(null)) {
-			if(f.checarProdutoFF(prod)) {
+		fornecedor = banco.lerFornecedor(forn);
+		if(!fornecedor.equals(null)) {
+			if(fornecedor.checarProdutoFF(prod)) {
 				return true;
 			}
 			throw new ProdutoNaoEncontradoException();
@@ -45,11 +44,10 @@ public class ProdutoDAO implements ContratoProduto{
 	}
 	
 	public boolean deleteProduto(DtoProduto prod, DtoUser forn) throws ProdutoNaoExisteException, UsuarioNaoEncontradaExeption{
-		f = CDI.lerFornecedor(forn);
-		if(f != null) {
-			if(f.removerProduto(prod)) {
-				if(CDI.atualizarFornecedor(f)) {
-					 CDI.salvarCentral(CDI, "Central");
+		fornecedor = banco.lerFornecedor(forn);
+		if(fornecedor != null) {
+			if(fornecedor.removerProduto(prod)) {
+				if(banco.atualizarFornecedor(fornecedor)) {
 					 return true;
 				}
 			}
@@ -59,26 +57,32 @@ public class ProdutoDAO implements ContratoProduto{
 	}
 	
 	public Produto readProduto(DtoProduto prod, DtoUser forn) throws UsuarioNaoEncontradaExeption{
-		f = CDI.lerFornecedor(forn);
-		if(f != null) {
-			return f.lerProduto(prod);	
+		fornecedor = banco.lerFornecedor(forn);
+		if(fornecedor != null) {
+			return fornecedor.lerProduto(prod);	
 		}
 		throw new  UsuarioNaoEncontradaExeption();
 	}
 	
 	public boolean updateProduto(Produto prod, DtoUser forn) throws  UsuarioNaoEncontradaExeption,   ProdutoNaoAtualizadoExeption{
-		f = CDI.lerFornecedor(forn);
-		if(f != null) {
-			if(f.AtualizarProduto(prod)) {
-				if(CDI.atualizarFornecedor(f)) {
-					 CDI.salvarCentral(CDI, "Central");
+		fornecedor = banco.lerFornecedor(forn);
+		if(fornecedor != null) {
+			if(fornecedor.AtualizarProduto(prod)) {
+				if(banco.atualizarFornecedor(fornecedor)) {
+					return true;
 				}
 			}
 			 throw new  ProdutoNaoAtualizadoExeption();
 		}
 		throw new  UsuarioNaoEncontradaExeption();
 	}
-	public ArrayList<Produto> retornaArrayProduto(Fornecedor user){
-		return user.retornaArrayProdutos();
+	
+	public ArrayList<Produto> retornaArrayProduto(DtoUser user) throws UsuarioNaoEncontradaExeption{
+		fornecedor = banco.lerFornecedor(user);
+		if(fornecedor != null) {
+			return fornecedor.retornaArrayProdutos();
+		}
+		throw new  UsuarioNaoEncontradaExeption();
+		
 	}
 }

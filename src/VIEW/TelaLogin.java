@@ -129,7 +129,7 @@ public class TelaLogin extends JFrame implements Ouvinte {
 		j.setFont(new Font(font, Font.BOLD, sizeFont));
 		j.setForeground(new Color(250, 250, 250));
 	}
-
+	
 	JPanel painel(JFrame j, Color c) {
 		JPanel p = new JPanel();
 		p.setBounds(0, 0, 300, 300);

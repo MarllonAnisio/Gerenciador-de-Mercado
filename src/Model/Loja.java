@@ -13,9 +13,7 @@ public class Loja {
 	private double saldo;
 	private LojaDAO loja;
 	
-	public boolean adicionarProduto(Produto prod) throws ProdutoNaoCadastradoException {
-		return loja.addProduto(prod);
-	}
+	
 	public boolean deleteProduto(DtoProduto prod) throws ProdutoNaoExisteException {
 		return loja.removerProduto(prod);
 	}
