@@ -40,6 +40,7 @@ public class CentralDeInformacoes {
 	
 	private CentralDeInformacoes() {
 
+		
 	}
 	
 	
@@ -51,15 +52,15 @@ public class CentralDeInformacoes {
 		 * ligação com a persistencia para receber nossa central em XMl retornando nossa
 		 * Central guardada.
 		 */
-		instance = banco.recuperarCentral("Central");
+		//instance = banco.recuperarCentral("Central");
 		/**
 		 * Primeira checagem para saber se está com nossa central
 		 */
 		if (instance == null) {
-			synchronized (Persistencia.class) {
+			synchronized (CentralDeInformacoes.class) {
 				
 				if (instance == null) {
-					instance = new CentralDeInformacoes();
+					instance = banco.recuperarCentral("Central");
 				}
 			}
 		}

@@ -1,162 +1,313 @@
 package VIEW;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowListener;
+import javax.swing.*;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-
+import Controler.FacadeFornecedor;
 import Controler.FacadeLoja;
-import Controler.Ouvinte;
-import Controler.OuvinteADM;
+import DAO.ProdutoNaoEncontradoException;
+import DAO.ProdutoNaoExisteException;
+import DAO.UsuarioNaoEncontradaExeption;
+import DAO.UsuarioNaoExistenteException;
+import DAO.ValorInvalidoException;
+import DTO.DtoProduto;
+import DTO.DtoUser;
 
-public class TelaADM extends JFrame implements Ouvinte{
-	
-	public JMenuItem produtoLoja = new JMenuItem("adicionar produto a loja");
-	public JMenuItem novoCliente = new JMenuItem("Nova Cliente");
-	public JMenuItem novoFornecedor = new JMenuItem("Novo Fornecedor");
-	public JMenuItem novoProdutoFornecedor = new JMenuItem("adicionar produto a fornecedor");
-	public JMenuItem deletarCliente = new JMenuItem("deletar Cliente");
-	public JMenuItem deletarProdutoLoja = new JMenuItem("deletar produto da loja");
-	public JMenuItem deletarFornecedor = new JMenuItem("deletar fornecedor");
-	public JMenuItem deletarProdutoFornecedor = new JMenuItem("deletar produto de fornecedor");
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-	public JMenuItem pesquisaFornecedorCnpj = new JMenuItem("pesquisar fornecedor por CNPJ");
-	public JMenuItem pesquisaFornecedorNome = new JMenuItem("pesquise um fornecedor por nome");
-	public JMenuItem pesquisarProdutoLoja = new JMenuItem("pesquisar produto na loja");
-	public JMenuItem pesquisarProdutoFornecedor = new JMenuItem("pesquise um produto em um fornecedor");
-	public JMenuItem pesquisarClienteCPF = new JMenuItem("pesquise um cliente por CPF");
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-	public JMenuItem comprarProdutoFornecedor = new JMenuItem("comprar Produto de Fornecedor");
-	public JMenuItem comprarProduto = new JMenuItem("Comprar Produto");
-	public JMenuItem venderProduto = new JMenuItem("Vender");
-	public JMenuItem estoqueProdutos = new JMenuItem("estoque da loja");
-	public JMenuItem estoqueFornecedor = new JMenuItem("estoque de fornecedores");
-	public JMenuItem adicionarSaldo = new JMenuItem("adicionar saldo a empresa");
-	FacadeLoja loja = new FacadeLoja();
-	public TelaADM() {
-		
-	}
-	public void desenharTela() {
-		
-		setContentPane(new ImagemPanel("src/VIEW/super-mercado_2.jpg"));
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(540,400);
-		setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-		
-		setResizable(false);
-		setTitle("~Administrador~");
-		setLocationRelativeTo(null);
-		adicionarComponetes_1(this);
-		Ouvinte ouvinte = new OuvinteADM(new TelaLogin(), this);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		addWindowListener((WindowListener)ouvinte);
-		ouvinte = new OuvinteADM(new TelaNovoCliente(), this);
-		novoFornecedor.addActionListener((ActionListener)ouvinte);
-		
-		setVisible(true);
-		
-	}
-	
-	
-	JLabel titulo(JFrame j, String t) { 
-		JLabel label = new JLabel(t);
-		return label;
-	}
-	
-	
-	public void adicionarComponetes_1(JFrame j) {
-		JMenuBar menu = new JMenuBar();
-		j.add(menu);
-		
-		JMenu opFile = new JMenu("Recursos");
-		opFile.setFont(new Font("Arial",Font.BOLD,12));
-		
-		opFile.add(novoCliente);
-		menu.add(opFile);
-		opFile.add(novoFornecedor);
-		menu.add(opFile);
-		opFile.add(produtoLoja);
-		menu.add(opFile);
-		opFile.add(novoProdutoFornecedor);
-		menu.add(opFile);
-		opFile.add(deletarCliente);
-		menu.add(opFile);
-		opFile.add(deletarProdutoLoja);
-		menu.add(opFile);
-		opFile.add(deletarProdutoFornecedor);
-		menu.add(opFile);
-		opFile.add(deletarFornecedor);
-		menu.add(opFile);
-		
-			
-		JMenu opFinancas = new JMenu("Pesquisa");
-		opFile.setFont(new Font("Arial",Font.BOLD,12));
-		
-		menu.add(opFinancas);
-		opFinancas.add(pesquisaFornecedorCnpj);
-		menu.add(opFinancas);
-		opFinancas.add(pesquisaFornecedorNome);
-		menu.add(opFinancas);
-		opFinancas.add(pesquisarProdutoLoja);
-		menu.add(opFinancas);
-		opFinancas.add(pesquisarProdutoFornecedor);
-		menu.add(opFinancas);
-		
-		
+public class TelaADM extends JFrame {
 
-		JMenu opEditar = new JMenu("Loja");
-		opFile.setFont(new Font("Arial",Font.BOLD,12));
-		
-		opEditar.add(estoqueProdutos);
-		menu.add(opEditar);
-		opEditar.add(estoqueFornecedor);
-		menu.add(opEditar);
-		opEditar.add(comprarProdutoFornecedor);
-		menu.add(opEditar);
-		opEditar.add(comprarProduto);
-		menu.add(opEditar);
-		opEditar.add(venderProduto);
-		menu.add(opEditar);
-		opEditar.add(adicionarSaldo);
-		menu.add(opEditar);
-		
-		
+    private JLabel labelSaldo;
+    FacadeLoja fachada = new FacadeLoja();
+    public TelaADM() {
+        super("Tela de Administração");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(540, 400);
 
+        // Defina a cor de fundo da janela
+        getContentPane().setBackground(new Color(173, 216, 230)); // LightSkyBlue
 
-	}
+        // Configuração da barra de menu
+        JMenuBar menuBar = new JMenuBar();
 
-	
-	
-	void corFont(JLabel j, int sizeFont) {
-		j.setFont(new Font("Arial",Font.BOLD,sizeFont));
-		j.setForeground(new Color(200,200,200));
-	}
-	
-	void corTextoPadrao(JLabel j,int sizeFont, String font) {
-		j.setFont(new Font(font,Font.BOLD,sizeFont));
-		j.setForeground(new Color(250,250,250));
-	}
-	
-	JPanel painel(JFrame j, Color c) {
-		JPanel p = new JPanel();
-		p.setBounds(0,0,300,300);
-		p.setBackground(c);
-		j.add(p);
-		return p;
-	}
-	JPanel getJPainel( Color c) {
-		JPanel p = new JPanel();
-		p.setBackground(c);
-		return p;
-	}
+        // Barra de menu Recursos
+        JMenu menuRecursos = new JMenu("Recursos");
+      
+        JMenuItem novoClienteItem = new JMenuItem("Novo Cliente");
+        JMenuItem novoFornecedorItem = new JMenuItem("Novo Fornecedor");
+        JMenuItem produtoLojaItem = new JMenuItem("Cadastrar produto para Loja");
+        JMenuItem novoProdutoFornecedorItem = new JMenuItem("Novo Produto Fornecedor");
+        JMenuItem deletarClienteItem = new JMenuItem("Deletar Cliente");
+        JMenuItem deletarProdutoLojaItem = new JMenuItem("Deletar Produto da Loja");
+        JMenuItem deletarProdutoFornecedorItem = new JMenuItem("Deletar Produto do Fornecedor");
+        JMenuItem deletarFornecedorItem = new JMenuItem("Deletar Fornecedor");
 
+        menuRecursos.add(novoClienteItem);
+        menuRecursos.add(novoFornecedorItem);
+        menuRecursos.add(produtoLojaItem);
+        menuRecursos.add(novoProdutoFornecedorItem);
+        menuRecursos.add(deletarClienteItem);
+        menuRecursos.add(deletarProdutoLojaItem);
+        menuRecursos.add(deletarProdutoFornecedorItem);
+        menuRecursos.add(deletarFornecedorItem);
+
+        // Adiciona ouvintes aos itens de menu de Recursos
+        adicionarOuvinteMenu(novoClienteItem);
+        adicionarOuvinteMenu(novoFornecedorItem);
+        adicionarOuvinteMenu(produtoLojaItem);
+        adicionarOuvinteMenu(novoProdutoFornecedorItem);
+        adicionarOuvinteMenu(deletarClienteItem);
+        adicionarOuvinteMenu(deletarProdutoLojaItem);
+        adicionarOuvinteMenu(deletarProdutoFornecedorItem);
+        adicionarOuvinteMenu(deletarFornecedorItem);
+
+        menuBar.add(menuRecursos);
+
+        // Barra de menu Pesquisa
+        JMenu menuPesquisa = new JMenu("Pesquisa");
+       
+        JMenuItem pesquisaFornecedorCnpjItem = new JMenuItem("Pesquisa Fornecedor por CNPJ");
+        JMenuItem pesquisaFornecedorNomeItem = new JMenuItem("Pesquisa Fornecedor por Nome");
+        JMenuItem pesquisarProdutoLojaItem = new JMenuItem("Pesquisar Produto na Loja");
+        JMenuItem pesquisarProdutoFornecedorItem = new JMenuItem("Pesquisar Produto no Fornecedor");
+
+        menuPesquisa.add(pesquisaFornecedorCnpjItem);
+        menuPesquisa.add(pesquisaFornecedorNomeItem);
+        menuPesquisa.add(pesquisarProdutoLojaItem);
+        menuPesquisa.add(pesquisarProdutoFornecedorItem);
+
+        // Adiciona ouvintes aos itens de menu de Pesquisa
+        adicionarOuvinteMenu(pesquisaFornecedorCnpjItem);
+        adicionarOuvinteMenu(pesquisaFornecedorNomeItem);
+        adicionarOuvinteMenu(pesquisarProdutoLojaItem);
+        adicionarOuvinteMenu(pesquisarProdutoFornecedorItem);
+
+        menuBar.add(menuPesquisa);
+
+        // Barra de menu Loja
+        JMenu menuLoja = new JMenu("Loja");
+      
+        JMenuItem estoqueProdutosItem = new JMenuItem("Estoque de Produtos");
+        JMenuItem estoqueFornecedorItem = new JMenuItem("Estoque do Fornecedor");
+        JMenuItem comprarProdutoFornecedorItem = new JMenuItem("Comprar Produto do Fornecedor");
+        JMenuItem comprarProdutoItem = new JMenuItem("Comprar Produto");
+        JMenuItem venderProdutoItem = new JMenuItem("Vender Produto");
+        JMenuItem adicionarSaldoItem = new JMenuItem("Adicionar Saldo");
+
+        menuLoja.add(estoqueProdutosItem);
+        menuLoja.add(estoqueFornecedorItem);
+        menuLoja.add(comprarProdutoFornecedorItem);
+        menuLoja.add(comprarProdutoItem);
+        menuLoja.add(venderProdutoItem);
+        menuLoja.add(adicionarSaldoItem);
+
+        // Adiciona ouvintes aos itens de menu de Loja
+        adicionarOuvinteMenu(estoqueProdutosItem);
+        adicionarOuvinteMenu(estoqueFornecedorItem);
+        adicionarOuvinteMenu(comprarProdutoFornecedorItem);
+        adicionarOuvinteMenu(comprarProdutoItem);
+        adicionarOuvinteMenu(venderProdutoItem);
+        adicionarOuvinteMenu(adicionarSaldoItem);
+
+        menuBar.add(menuLoja);
+
+        setJMenuBar(menuBar);
+
+        // Configuração do label de saldo
+        labelSaldo = new JLabel(String.valueOf(fachada.getSaldo()));
+        labelSaldo.setHorizontalAlignment(SwingConstants.RIGHT);
+        labelSaldo.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 10));
+
+        add(labelSaldo, BorderLayout.SOUTH);
+
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    private void adicionarOuvinteMenu(JMenuItem itemMenu) {
+        itemMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	DtoUser user;
+            	String pley = itemMenu.getText();
+	            FacadeFornecedor f = new FacadeFornecedor();
+	            DtoProduto p;
+	            switch (pley) {
+
+	    		case "Novo Cliente":
+	    			
+	    			break;
+	    			
+	    		case "Novo Fornecedor":
+	    			dispose();
+	    			new TelaCadastroFornecedor();
+	    			break;
+	    			
+	    		case "Cadastrar produto para Loja":
+	    			dispose();
+	    			new TelaCadastroProduto();
+	    			break;
+	    			
+	    		case "Novo Produto Fornecedor":
+	    			dispose();
+	    			new TelaCadastroNovoProdutoFornecedor();
+	    			break;
+	    		case "Deletar Cliente":
+	    			long valor = Long.parseLong(JOptionPane.showInputDialog("digite o cpf"));
+	    			user = new DtoUser(0,valor);
+	    			try {
+						if(fachada.deleteUserCliente(user)) {
+							JOptionPane.showMessageDialog(null, "Cliente Deletado", "sucesso", 2);
+						}
+					} catch (UsuarioNaoExistenteException e1) {
+						JOptionPane.showMessageDialog(null, "usuario nao existe", "ação impossivel", 2);
+					}
+	    			break;
+	    			
+	    		case "Deletar Produto da Loja":
+	    			String nomeprod = JOptionPane.showInputDialog("digite o nome do produto");
+	    			p = new DtoProduto(nomeprod);
+	    			try {
+						if(fachada.deleteProduto(p)) {
+							JOptionPane.showMessageDialog(null, "Produto Deletado", "sucesso", 2);
+						}
+					} catch (HeadlessException | ProdutoNaoExisteException e1) {
+						JOptionPane.showMessageDialog(null, " Erro fatal", " ERRO!!!!!!!!!!!!!!", 2);
+					}
+	    			break;
+	    			
+	    			
+	    		case "Deletar Produto do Fornecedor":
+	    			long Cnpj = Long.parseLong(JOptionPane.showInputDialog(" "));
+	    			user = new DtoUser(0,Cnpj);
+	    			String nome = JOptionPane.showInputDialog("digite o nome do produto");
+	    			p = new DtoProduto(nome);
+	    			
+	    			try {
+						if(f.checarProdutoF(p, user)) {
+							JOptionPane.showMessageDialog(null, " produto  Deletado", "sucesso", 2);
+						}
+					} catch (HeadlessException | ProdutoNaoEncontradoException | UsuarioNaoEncontradaExeption e1) {
+						JOptionPane.showMessageDialog(null, " -----Erro fatal---- ", " ERRO!!!!!!!!!!!!!!", 2);
+					}
+	    			break;
+	    		case "Deletar Fornecedor":
+	    			long cnpj = Long.parseLong(JOptionPane.showInputDialog("digite o cpf"));
+	    			user = new DtoUser(0,cnpj);
+	    			
+	    			try {
+						if(f.deleteUser(user)) {
+							JOptionPane.showMessageDialog(null, "Fornecedor Deletado", "sucesso", 2);
+						}
+					} catch (UsuarioNaoExistenteException e1) {
+						JOptionPane.showMessageDialog(null, "usuario nao existe", "ação impossivel", 2);
+					}
+	    			break;
+	    		case "Pesquisa Fornecedor por CNPJ":
+	    			long c = Long.parseLong(JOptionPane.showInputDialog("digite o cpf"));
+	    			user = new DtoUser(0,c);
+	    			try {
+						if(f.procuraFornecedor(user)) {
+							JOptionPane.showMessageDialog(null, "Cliente Deletado", "sucesso", 2);
+						}
+					} catch (HeadlessException | UsuarioNaoEncontradaExeption e1) {
+						JOptionPane.showMessageDialog(null, " -----Erro fatal---- ", " ERRO!!!!!!!!!!!!!!", 2);
+						
+					}
+	    			break;
+	    		case "Pesquisa Fornecedor por Nome":
+	    			String name = JOptionPane.showInputDialog("digite o nome do fornecedor para saber se ele exixte no sistema");
+	    			user = new DtoUser(name);
+	    			try {
+						if(f.procuraFornecedor(user)) {
+							JOptionPane.showMessageDialog(null, "fornecedor se enc", "sucesso", 2);
+						}
+					} catch (HeadlessException | UsuarioNaoEncontradaExeption e1) {
+						JOptionPane.showMessageDialog(null, " -----Erro fatal---- ", " ERRO!!!!!!!!!!!!!!", 2);
+					}
+	    			break;
+
+	    		case "Pesquisar Produto na Loja":
+	    			String produtoLo = JOptionPane.showInputDialog("digite o cpf");
+	    			p = new DtoProduto(produtoLo);
+	    			try {
+						if(fachada.checarProduto(p)) {
+							JOptionPane.showMessageDialog(null, "produto se encontra na loja", "sucesso", 2);
+						}
+					} catch (HeadlessException | ProdutoNaoEncontradoException e1) {
+						JOptionPane.showMessageDialog(null, "Cliente Deletado", "sucesso", 2);
+						
+					}
+	    			break;
+	    		case "Pesquisar Produto no Fornecedor":
+	    			long cnpj1 = Long.parseLong(JOptionPane.showInputDialog("digite o cnpj"));
+	    			String nome1 = JOptionPane.showInputDialog("digite o nome do produto");
+	    			DtoProduto d = new DtoProduto(nome1);
+	    			user = new DtoUser(0,cnpj1);
+	    			try {
+						if(f.checarProdutoF(d, user)) {
+							JOptionPane.showMessageDialog(null, "Cliente Deletado", "sucesso", 2);
+						}
+					} catch (HeadlessException | ProdutoNaoEncontradoException | UsuarioNaoEncontradaExeption e1) {
+						
+						JOptionPane.showMessageDialog(null, " Erro fatal", " ERRO!!!!!!!!!!!!!!", 2);
+					}
+	    			break;
+	    		case "Estoque do Fornecedor":
+	    			dispose();
+	    			new EstoqueFornecedor();
+	    			break;
+	    			
+	    		case "Estoque de Produtos":
+	    			dispose();
+	    			new TelaListaProdutos();
+	    			break;
+	    			
+	    		case "Comprar Produto do Fornecedor":
+	    			dispose();
+	    			new TelaCompraProdutoFornecedor();
+	    			break;
+	    			
+	    		case "Comprar Produto":
+	    
+		    		break;
+		    		
+		    		
+	    		case "Vender Produto":
+	    			dispose();
+	    			new TelaVendaProduto();
+		    		break;
+		    		
+	    		case "Adicionar Saldo":
+	    			double saldo = Double.parseDouble(JOptionPane.showInputDialog("digite o valor R$ "));
+		    		try {
+						if(fachada.setSaldo(saldo)) {
+							JOptionPane.showMessageDialog(null, "saldo adicionado com sucesso", "sucesso", 2);
+						}
+					} catch (ValorInvalidoException e1) {
+						JOptionPane.showMessageDialog(null, "por favor apenas valores positivos ", "sucesso", 2);
+						
+					}
+	    			break;
+	    		
+            }
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new TelaADM();
+            }
+        });
+    }
 }
+											

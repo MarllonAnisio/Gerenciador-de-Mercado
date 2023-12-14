@@ -19,19 +19,20 @@ public class DtoProduto {
 	/**
 	 * Construtor cheio terá que ser assim para adicionarmos nosso produto
 	 * */
-	public DtoProduto(String nomeProd,double valorGeral,
-			double valor,String marca,TipoProduto tipo,
-			String descricao,int quantidade,double peso) {
+	public DtoProduto(String nomeProd,double valor,String marca,TipoProduto tipo,
+			String descricao,int quantidade) {
 		
 		setTipoDoProduto(tipo);
 		setName(nomeProd);
 		setQtdProdutos(quantidade);
 		setPeso(peso);
 		setDescricao(descricao);
-		setValorGeral(valorGeral);
 		setValorProduto(valor);
 		setNomeMarca(marca);
 		
+	}
+	public DtoProduto(String nome) {
+		this.nameProduto = nome;
 	}
 	/**
 	 * retorna o tipo do produto, o tipo do produto inpactará na criação do mesmo

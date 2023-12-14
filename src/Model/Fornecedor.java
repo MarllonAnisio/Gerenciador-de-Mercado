@@ -82,7 +82,7 @@ public class Fornecedor extends Pessoa {
 		
 	}
 	
-	public Produto checarProdutoR(DtoProduto prod, DtoUser forn ) throws UsuarioNaoEncontradaExeption {
+	public Produto checarProduto(DtoProduto prod, DtoUser forn ) throws UsuarioNaoEncontradaExeption {
 		fornecedor = banco.lerFornecedor(forn);
 		if(fornecedor != null) {
 			for(Produto x: produtos) {

@@ -14,21 +14,18 @@ public class PessoaDAO {
 	public PessoaDAO() {
 		CDI = CentralDeInformacoes.getInstance();
 	}
-//	throws UsuarioNaoCadastradoException
-//	throws UsuarioNaoExistenteException
-//	throws UsuarioNaoEncontradaExeption
-//	 throws UsuarioNaoAtualizadoException
+	
 
 	public boolean adicionarADM(Pessoa user) throws UsuarioNaoCadastradoException{
-		if(CDI.administradores == null) {
-			CDI.administradores.add((ADM) user);
-			CDI.salvarCentral(CDI, "Central");
-			return true;
-			}
 		for (ADM x : CDI.administradores) {
 			if (user.getEmail().equals(x.getEmail())) {
 				throw new  UsuarioNaoCadastradoException();
 			}
+		}
+		if(CDI.administradores == null) {
+			CDI.administradores.add((ADM) user);
+			CDI.salvarCentral(CDI, "Central");
+			return true;
 		}
 		CDI.administradores.add((ADM) user);
 		CDI.salvarCentral(CDI, "Central");
@@ -36,11 +33,6 @@ public class PessoaDAO {
 	}
 	
 	public boolean adicionarFornecedor(Pessoa user) throws UsuarioNaoCadastradoException{
-		if(CDI.fornecedores == null) {
-			CDI.fornecedores.add((Fornecedor) user);
-			CDI.salvarCentral(CDI, "Central");
-			return true;
-			}
 		for (Fornecedor fornecedor : CDI.fornecedores) {
 			if (fornecedor.getCnpj() == user.getCnpj()) {
 				throw new  UsuarioNaoCadastradoException();
@@ -50,7 +42,13 @@ public class PessoaDAO {
 			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
+		if(CDI.fornecedores == null) {
+			CDI.fornecedores.add((Fornecedor) user);
+			CDI.salvarCentral(CDI, "Central");
+			return true;
+		}
 		CDI.fornecedores.add((Fornecedor) user);
+		CDI.salvarCentral(CDI, "Central");
 		return true;
 	}
 	

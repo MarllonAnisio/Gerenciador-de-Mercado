@@ -1,4 +1,4 @@
-package VIEW.botao;
+package VIEW;
 
 import javax.swing.JPasswordField;
 

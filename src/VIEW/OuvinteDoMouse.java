@@ -1,4 +1,4 @@
-package VIEW.botao;
+package VIEW;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

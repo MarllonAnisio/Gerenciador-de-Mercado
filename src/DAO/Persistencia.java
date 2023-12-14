@@ -29,6 +29,7 @@ public class Persistencia {
 	public Persistencia() {
 		xstream.addPermission(AnyTypePermission.ANY);
 		arquivo = new File("Central");
+	
 	}
 	/**
 	 * metodo que salvará nosso nossa central.XML

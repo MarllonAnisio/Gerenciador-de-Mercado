@@ -21,7 +21,10 @@ public class DtoUser {
 		this.email = email;
 		this.nome = nome;
 	}
-	
+	public DtoUser(long CNPJ, long CPF) {
+		cnpj = CNPJ;
+		cpf = CPF;
+	}
 	/**
 	 * 
 	 * construtor para receber dados futuros de um fornecedor
@@ -57,6 +60,9 @@ public class DtoUser {
 
 	}
 
+	public DtoUser(String name) {
+		this.nome = name;
+	}
 	public String getSenha() {
 		return senha;
 	}

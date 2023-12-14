@@ -10,9 +10,7 @@ public class LojaDAO {
 	CentralDeInformacoes CDI = CentralDeInformacoes.getInstance();
 	Produto produto;
 
-	public void setSaldo(double saldo) {
-
-	}
+	
 
 	public boolean AdicionarProduto(Produto prod) throws ProdutoNaoCadastradoException {
 		for (Produto x : CDI.estoque) {
@@ -80,7 +78,7 @@ public class LojaDAO {
 	}
 	public boolean adicionarSaldo(double valor) throws  ValorInvalidoException{
 		if(valor > 0) {
-			CDI.setSaldo(valor);
+			CDI.setSaldo(valor + CDI.getSaldo());
 			CDI.salvarCentral(CDI, "Central");
 			return true;
 		}
